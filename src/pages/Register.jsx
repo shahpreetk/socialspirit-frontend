@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { volunteerRegister } from '../features/volunteerauth/volunteerauthSlice';
+import { volunteerRegister, reset } from '../features/volunteerauth/volunteerauthSlice';
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [formData, setFormData] = React.useState({
@@ -13,7 +14,9 @@ const Register = () => {
   const { name, email, password } = formData;
 
   const dispatch = useDispatch();
-  const { volunteer, isLoading, isSuccess, isError, message  } = useSelector((state) => state.volunteerauth);
+  const navigate = useNavigate();
+
+  const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -28,9 +31,23 @@ const Register = () => {
       name,
       email,
       password,
-    }
+    };
     dispatch(volunteerRegister(volunteerData));
   };
+
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    // Redirect when logged in
+    if (isSuccess && volunteer) {
+      toast.success('Please verify your email with the link sent to your email');
+      navigate('/v/login');
+    }
+
+    dispatch(reset());
+  },[isError,isSuccess,volunteer,message, navigate,dispatch] );
 
   return (
     <>
