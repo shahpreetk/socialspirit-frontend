@@ -8,6 +8,10 @@ const initialState = {
   message: "",
 };
 
+export const volunteerRegister = createAsyncThunk('volunteerauth/volunteerregister', async (volunteer, thunkAPI) => {
+  console.log(volunteer);
+})
+
 export const volunteerauthSlice = createSlice({
   name: "volunteerauth",
   initialState,

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { volunteerRegister } from '../features/volunteerauth/volunteerauthSlice';
 
 const Register = () => {
   const [formData, setFormData] = React.useState({
@@ -10,6 +12,9 @@ const Register = () => {
 
   const { name, email, password } = formData;
 
+  const dispatch = useDispatch();
+  const { volunteer, isLoading, isSuccess, isError, message  } = useSelector((state) => state.volunteerauth);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -19,7 +24,12 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    const volunteerData = {
+      name,
+      email,
+      password,
+    }
+    dispatch(volunteerRegister(volunteerData));
   };
 
   return (
@@ -53,7 +63,7 @@ const Register = () => {
                       <label className="label">
                         <span className="label-text">Password</span>
                       </label>
-                      <input type="password" id="password" name="password" value={password} onChange={onChange} placeholder="Enter Password" className="input input-bordered" required />
+                      <input type="password" id="password" name="password" minLength="8" value={password} onChange={onChange} placeholder="Enter Password" className="input input-bordered" required />
                       <label className="label">
                         <Link to="/o/register" className="label-text-alt link text-secondary-focus link-hover ">Register as an Organisation?</Link>
                       </label>
