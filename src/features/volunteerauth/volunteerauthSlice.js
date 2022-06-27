@@ -8,7 +8,13 @@ const initialState = {
   message: "",
 };
 
+// Register new Volunteer
 export const volunteerRegister = createAsyncThunk('volunteerauth/volunteerregister', async (volunteer, thunkAPI) => {
+  console.log(volunteer);
+})
+
+// Login Volunteer
+export const volunteerLogin = createAsyncThunk('volunteerauth/volunteerlogin', async (volunteer, thunkAPI) => {
   console.log(volunteer);
 })
 

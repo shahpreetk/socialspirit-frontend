@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { volunteerLogin } from '../features/volunteerauth/volunteerauthSlice';
 
 const Login = () => {
   const [formData, setFormData] = React.useState({
@@ -8,6 +10,9 @@ const Login = () => {
   });
 
   const { email, password } = formData;
+
+  const dispatch = useDispatch();
+  const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -18,7 +23,11 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    const volunteerData = {
+      email,
+      password,
+    };
+    dispatch(volunteerLogin(volunteerData));
   };
 
   return (
