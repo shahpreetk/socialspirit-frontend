@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { volunteerRegister, reset } from '../features/volunteerauth/volunteerauthSlice';
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Register = () => {
   const [formData, setFormData] = React.useState({
@@ -40,7 +41,7 @@ const Register = () => {
       toast.error(message);
     }
 
-    // Redirect when logged in
+    // Redirect when registered
     if (isSuccess) {
       toast.success('Please verify your email with the link sent to your email');
       navigate('/v/login');
@@ -48,6 +49,10 @@ const Register = () => {
 
     dispatch(reset());
   },[isError,isSuccess,volunteer,message, navigate,dispatch] );
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>

@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { volunteerLogin } from '../features/volunteerauth/volunteerauthSlice';
+import { volunteerLogin, reset } from '../features/volunteerauth/volunteerauthSlice';
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const [formData, setFormData] = React.useState({
@@ -12,6 +14,8 @@ const Login = () => {
   const { email, password } = formData;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
 
   const onChange = (e) => {
@@ -29,6 +33,23 @@ const Login = () => {
     };
     dispatch(volunteerLogin(volunteerData));
   };
+
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    // Redirect when logged in
+    if (isSuccess && volunteer) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, volunteer, message, navigate, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
