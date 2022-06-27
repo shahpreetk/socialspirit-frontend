@@ -29,6 +29,11 @@ export const volunteerLogin = createAsyncThunk('volunteerauth/volunteerlogin', a
   console.log(volunteer);
 })
 
+// Logout Volunteer
+export const volunteerLogout = createAsyncThunk('volunteerauth/volunteerlogout', async () => {
+  await volunteerauthService.volunteerlogout();
+ })
+
 export const volunteerauthSlice = createSlice({
   name: "volunteerauth",
   initialState,
@@ -48,12 +53,15 @@ export const volunteerauthSlice = createSlice({
       .addCase(volunteerRegister.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.volunteer = action.payload;
+        state.volunteer = null;
       })
       .addCase(volunteerRegister.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        state.volunteer = null;
+      })
+      .addCase(volunteerLogout.fulfilled, (state) => {
         state.volunteer = null;
       })
   },

@@ -41,7 +41,7 @@ const Register = () => {
     }
 
     // Redirect when logged in
-    if (isSuccess && volunteer) {
+    if (isSuccess) {
       toast.success('Please verify your email with the link sent to your email');
       navigate('/v/login');
     }

@@ -11,8 +11,12 @@ const volunteerregister = async (volunteerData) => {
   return response.data;
 };
 
+// Logout volunteer
+const volunteerlogout = async () => localStorage.removeItem('volunteer');
+
 const volunteerauthService = {
   volunteerregister,
+  volunteerlogout
 };
 
 export default volunteerauthService;
