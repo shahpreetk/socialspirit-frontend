@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { volunteerLogin, reset } from '../features/volunteerauth/volunteerauthSlice';
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { HOME, O_LOGIN } from "../constants/routes";
 
 const Login = () => {
   const [formData, setFormData] = React.useState({
@@ -41,7 +42,7 @@ const Login = () => {
 
     // Redirect when logged in
     if (isSuccess && volunteer) {
-      navigate('/');
+      navigate(HOME);
     }
 
     dispatch(reset());
@@ -77,7 +78,7 @@ const Login = () => {
                       </label>
                       <input type="password" id="password" name="password" value={password} onChange={onChange} placeholder="Enter Password" className="input input-bordered" required />
                       <label className="label">
-                        <Link to="/o/login" className="label-text-alt link link-hover mt-2 text-primary-focus">Login as an Organisation?</Link>
+                        <Link to={O_LOGIN} className="label-text-alt link link-hover mt-2 text-primary-focus">Login as an Organisation?</Link>
                       </label>
                     </div>
                     <div className="form-control mt-6">

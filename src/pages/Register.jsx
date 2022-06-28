@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { volunteerRegister, reset } from '../features/volunteerauth/volunteerauthSlice';
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import { V_LOGIN,O_REGISTER } from "../constants/routes";
 
 const Register = () => {
   const [formData, setFormData] = React.useState({
@@ -44,7 +45,7 @@ const Register = () => {
     // Redirect when registered
     if (isSuccess) {
       toast.success('Please verify your email with the link sent to your email');
-      navigate('/v/login');
+      navigate(V_LOGIN);
     }
 
     dispatch(reset());
@@ -87,7 +88,7 @@ const Register = () => {
                       </label>
                       <input type="password" id="password" name="password" minLength="8" value={password} onChange={onChange} placeholder="Enter Password" className="input input-bordered" required />
                       <label className="label">
-                        <Link to="/o/register" className="label-text-alt link text-secondary-focus link-hover ">Register as an Organisation?</Link>
+                        <Link to={O_REGISTER} className="label-text-alt link text-secondary-focus link-hover ">Register as an Organisation?</Link>
                       </label>
                     </div>
                     <div className="form-control mt-6">
