@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { volunteerRegister, reset } from '../features/volunteerauth/volunteerauthSlice';
+import { volunteerRegister, volunteerreset } from '../features/volunteerauth/volunteerauthSlice';
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import { V_LOGIN,O_REGISTER } from "../constants/routes";
 
-const Register = () => {
+const VolunteerRegister = () => {
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -48,7 +48,7 @@ const Register = () => {
       navigate(V_LOGIN);
     }
 
-    dispatch(reset());
+    dispatch(volunteerreset());
   },[isError,isSuccess,volunteer,message, navigate,dispatch] );
 
   if (isLoading) {
@@ -105,4 +105,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default VolunteerRegister;

@@ -1,7 +1,8 @@
 import { FaBars, FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { volunteerLogout, reset } from "../features/volunteerauth/volunteerauthSlice";
+import { volunteerLogout, volunteerreset } from "../features/volunteerauth/volunteerauthSlice";
+import { organisationLogout, organisationreset } from "../features/organisationauth/organisationauthSlice";
 import * as ROUTES from '../constants/routes'
 
 const Header = () => {
@@ -10,9 +11,17 @@ const Header = () => {
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
 
+  const { organisation } = useSelector((state) => state.organisationauth);
+
   const onLogout = () => {
-    dispatch(volunteerLogout());
-    dispatch(reset());
+    if (volunteer) {
+      dispatch(volunteerLogout());
+      dispatch(volunteerreset());
+    }
+    if (organisation) {
+      dispatch(organisationLogout());
+      dispatch(organisationreset());
+    }
     navigate(ROUTES.V_LOGIN);
   };
 
@@ -33,7 +42,15 @@ const Header = () => {
                   <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
                   </li>
                 </>
-              ) : (<>
+              ) : organisation ? (
+              <>
+                <li><Link to={ROUTES.HOME}>Events</Link></li>
+                <li><Link to="/v/events">My Events</Link></li>
+                <li><Link to="/v/profile">Profile</Link></li>
+                <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
+                </li>
+              </>
+            ) : (<>
                 <li><Link to={ROUTES.V_LOGIN}><FaSignInAlt />Login</Link></li>
                   <li><Link to={ROUTES.V_REGISTER}><FaUser />Register</Link></li>
               </>)}
@@ -51,6 +68,14 @@ const Header = () => {
                 <li><Link to={ROUTES.MY_EVENTS}>My Events</Link></li>
                 <li><Link to={ROUTES.PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
+                </li>
+              </>
+            ) : organisation ? (
+              <>
+                <li><Link to={ROUTES.HOME}>Events</Link></li>
+                <li><Link to="/v/events">My Events</Link></li>
+                <li><Link to="/v/profile">Profile</Link></li>
+                <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                 </li>
               </>
             ) : (<>

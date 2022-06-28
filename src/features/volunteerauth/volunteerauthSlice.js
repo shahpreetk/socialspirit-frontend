@@ -47,7 +47,7 @@ export const volunteerauthSlice = createSlice({
   name: "volunteerauth",
   initialState,
   reducers: {
-    reset: (state) => {
+    volunteerreset: (state) => {
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
@@ -90,6 +90,6 @@ export const volunteerauthSlice = createSlice({
   },
 });
 
-export const { reset } = volunteerauthSlice.actions;
+export const { volunteerreset } = volunteerauthSlice.actions;
 
 export default volunteerauthSlice.reducer;
