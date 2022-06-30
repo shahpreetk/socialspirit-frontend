@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import { volunteerLogin, volunteerreset } from '../features/volunteerauth/volunteerauthSlice';
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 // import Spinner from "../components/Spinner";
 // import { HOME } from "../constants/routes";
 
@@ -19,15 +19,26 @@ const VolunteerProfile = () => {
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
 
-
   const isDisabled = e => {
     e.preventDefault();
-    setDisabled(!disabled);
+    if (!volunteer.introduction || !volunteer.hobbies.length) {
+      toast.error("Please fill in all fields");
+    } else {
+      setDisabled(!disabled);
+    }
   };
 
   const onSubmit = e => {
     console.log(formData);
+  };
+
+  React.useEffect(() => {
+      if (!volunteer.introduction || !volunteer.hobbies.length) {
+    setDisabled(false);
+  } else {
+    setDisabled(true);
   }
+  },[volunteer]);
 
   console.log({ disabled });
   // console.log(volunteer);
@@ -100,7 +111,7 @@ const VolunteerProfile = () => {
                   <div className="mt-1">
 
                     <textarea className="textarea input-bordered border-red-800 w-full" rows={3} id="about"
-                      name="about" value={introduction} placeholder="Write a few sentences about yourself." required disabled={disabled}></textarea>
+                      name="about" value={volunteer ? volunteer.introduction : introduction} placeholder="Write a few sentences about yourself." required disabled={disabled}></textarea>
                   </div>
                 </div>
 
@@ -109,7 +120,7 @@ const VolunteerProfile = () => {
                     Hobbies / Interests / Skills
                   </label>
                   <div className="mt-1">
-                    <input type="email" value={hobbies} id="email" name="email" placeholder="Enter your Hobbies, Interests and Skills" className="input input-bordered w-full border-red-800" required disabled={disabled} />
+                    <input type="text" id="hobbies" name="hobbies" value={volunteer ? volunteer.hobbies : hobbies} placeholder="Enter your Hobbies, Interests and Skills" className="input input-bordered w-full border-red-800" required disabled={disabled} />
                   </div>
                 </div>
 
