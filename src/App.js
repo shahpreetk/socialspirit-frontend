@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import * as ROUTES from "./constants/routes";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -22,13 +22,16 @@ function App() {
             <Route path={ROUTES.V_LOGIN} element={<VolunteerLogin />} />
             <Route path={ROUTES.O_LOGIN} element={<OrganisationLogin />} />
             <Route path={ROUTES.V_REGISTER} element={<VolunteerRegister />} />
-            <Route path={ROUTES.O_REGISTER} element={<OrganisationRegister />} />
+            <Route
+              path={ROUTES.O_REGISTER}
+              element={<OrganisationRegister />}
+            />
             <Route path={ROUTES.V_PROFILE} element={<VolunteerProfile />} />
             <Route path={ROUTES.O_PROFILE} element={<OrganisationProfile />} />
           </Routes>
         </div>
       </Router>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }
