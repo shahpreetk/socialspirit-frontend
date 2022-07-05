@@ -10,6 +10,8 @@ import OrganisationLogin from "./pages/OrganisationLogin";
 import OrganisationRegister from "./pages/OrganisationRegister";
 import VolunteerProfile from "./pages/VolunteerProfile";
 import OrganisationProfile from "./pages/OrganisationProfile";
+import VolunteerEvents from "./pages/VolunteerEvents";
+import OrganisationEvents from "./pages/OrganisationEvents";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
             />
             <Route path={ROUTES.V_PROFILE} element={<VolunteerProfile />} />
             <Route path={ROUTES.O_PROFILE} element={<OrganisationProfile />} />
+            <Route path={ROUTES.V_EVENTS} element={<VolunteerEvents />} />
+            <Route path={ROUTES.O_EVENTS} element={<OrganisationEvents />} />
           </Routes>
         </div>
       </Router>

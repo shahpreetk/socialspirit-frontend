@@ -37,7 +37,7 @@ const Header = () => {
               {volunteer ? (
                 <>
                   <li><Link to={ROUTES.HOME}>Events</Link></li>
-                  <li><Link to="/v/events">My Events</Link></li>
+                  <li><Link to={ROUTES.V_EVENTS}>My Events</Link></li>
                   <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
                   <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
                   </li>
@@ -45,7 +45,7 @@ const Header = () => {
               ) : organisation ? (
               <>
                 <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to="/v/events">My Events</Link></li>
+                <li><Link to={ROUTES.O_EVENTS}>My Events</Link></li>
                 <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                 </li>
@@ -65,7 +65,7 @@ const Header = () => {
               <>
 
                 <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to={ROUTES.MY_EVENTS}>My Events</Link></li>
+                <li><Link to={ROUTES.V_EVENTS}>My Events</Link></li>
                 <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
                 </li>
@@ -73,7 +73,7 @@ const Header = () => {
             ) : organisation ? (
               <>
                 <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to="/v/events">My Events</Link></li>
+                <li><Link to={ROUTES.O_EVENTS}>My Events</Link></li>
                 <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                 </li>

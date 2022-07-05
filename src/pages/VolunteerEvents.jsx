@@ -2,8 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { V_PROFILE } from '../constants/routes';
-
-const Home = () => {
+const VolunteerEvents = () => {
   const navigate = useNavigate();
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
@@ -13,12 +12,9 @@ const Home = () => {
       navigate(V_PROFILE);
     }
   }, [volunteer, navigate]);
-
   return (
-    <>
-      <div> Home</div>
-    </>
-  );
-};
+    <div>VolunteerEvents</div>
+  )
+}
 
-export default Home;
+export default VolunteerEvents
