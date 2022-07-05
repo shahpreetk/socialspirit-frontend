@@ -38,6 +38,21 @@ export const volunteerLogin = createAsyncThunk('volunteerauth/volunteerlogin', a
  }
 })
 
+
+// Update Volunteer
+export const volunteerUpdate = createAsyncThunk('volunteerauth/volunteerupdate', async (volunteerData, thunkAPI) => {
+ try {
+   return await volunteerauthService.volunteerupdate(volunteerData, volunteer.token);
+ } catch (error) {
+   const message =
+     (error.response && error.response.data && error.response.data.message) ||
+     error.message ||
+     error.toString();
+
+   return thunkAPI.rejectWithValue(message);
+ }
+})
+
 // Logout Volunteer
 export const volunteerLogout = createAsyncThunk('volunteerauth/volunteerlogout', async () => {
   await volunteerauthService.volunteerlogout();
@@ -82,6 +97,20 @@ export const volunteerauthSlice = createSlice({
         state.volunteer = action.payload;
       })
       .addCase(volunteerLogin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.volunteer = null;
+      })
+      .addCase(volunteerUpdate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(volunteerUpdate.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.volunteer = action.payload;
+      })
+      .addCase(volunteerUpdate.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

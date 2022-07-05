@@ -1,23 +1,23 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import { volunteerLogin, volunteerreset } from '../features/volunteerauth/volunteerauthSlice';
+import { volunteerUpdate, volunteerreset } from "../features/volunteerauth/volunteerauthSlice";
 import { toast } from "react-toastify";
-// import Spinner from "../components/Spinner";
-// import { HOME } from "../constants/routes";
+import Spinner from "../components/Spinner";
+import { HOME } from "../constants/routes";
 
 const VolunteerProfile = () => {
-  const [disabled, setDisabled] = React.useState(true);
+  const [disabled, setDisabled] = React.useState(false);
   const [formData, setFormData] = React.useState({
     introduction: "",
     hobbies: []
   });
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { introduction, hobbies } = formData;
 
-  const { volunteer } = useSelector((state) => state.volunteerauth);
+  const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
 
   const isDisabled = e => {
     e.preventDefault();
@@ -28,20 +28,44 @@ const VolunteerProfile = () => {
     }
   };
 
+  const onChange = e => {
+    console.log(e.target.name);
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const onSubmit = e => {
-    console.log(formData);
+    e.preventDefault();
+    const volunteerData = {
+      introduction,
+      hobbies,
+    };
+    dispatch(volunteerUpdate(volunteerData));
   };
 
   React.useEffect(() => {
-      if (!volunteer.introduction || !volunteer.hobbies.length) {
-    setDisabled(false);
-  } else {
-    setDisabled(true);
-  }
-  },[volunteer]);
+    if (volunteer.introduction || volunteer.hobbies.length) {
+      setDisabled(true);
+    }
+    if (isError) {
+      toast.error(message);
+    }
 
-  console.log({ disabled });
-  // console.log(volunteer);
+    // Redirect when logged in
+    if (isSuccess && volunteer) {
+      navigate(HOME);
+    }
+
+    dispatch(volunteerreset());
+  }, [isError, isSuccess, volunteer, message, navigate, dispatch]);
+
+console.log({introduction, hobbies});
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <div className="max-w-2xl md:mx-auto mx-5">
@@ -83,7 +107,7 @@ const VolunteerProfile = () => {
                   <label className="label">
                     <span className="label-text">First Name</span>
                   </label>
-                  <input type="text" id="fname" name="fname" placeholder={!volunteer ? "Enter your First Name" : null} value={volunteer.name.split(" ")[0]} className="input input-bordered w-full border-red-800" disabled />
+                  <input type="text" id="fname" name="name" placeholder={!volunteer ? "Enter your First Name" : null} value={volunteer.name.split(" ")[0]} className="input input-bordered w-full border-red-800" disabled />
 
                 </div>
 
@@ -91,7 +115,7 @@ const VolunteerProfile = () => {
                   <label className="label">
                     <span className="label-text">Last Name</span>
                   </label>
-                  <input type="text" id="lname" name="lname" placeholder={!volunteer ? "Enter your Last Name" : null} value={volunteer.name.split(" ")[1]} className="input input-bordered w-full border-red-800" disabled />
+                  <input type="text" id="lname" name="name" placeholder={!volunteer ? "Enter your Last Name" : null} value={volunteer.name.split(" ")[1]} className="input input-bordered w-full border-red-800" disabled />
 
                 </div>
 
@@ -105,22 +129,22 @@ const VolunteerProfile = () => {
                 </div>
 
                 <div className="sm:col-span-6">
-                  <label htmlFor="about" className="block text-sm font-medium text-neutral">
-                    About
+                  <label htmlFor="introduction" className="block text-sm font-medium text-neutral">
+                    Introduction
                   </label>
                   <div className="mt-1">
 
-                    <textarea className="textarea input-bordered border-red-800 w-full" rows={3} id="about"
-                      name="about" value={volunteer ? volunteer.introduction : introduction} placeholder="Write a few sentences about yourself." required disabled={disabled}></textarea>
+                    <textarea className="textarea input-bordered border-red-800 w-full" rows={3} id="introduction"
+                      name="introduction" value={introduction} placeholder={!volunteer.introduction ? "Write a few sentences about yourself." : volunteer.introduction} required disabled={disabled} onChange={onChange}></textarea>
                   </div>
                 </div>
 
                 <div className="sm:col-span-6">
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral">
+                  <label htmlFor="hobbies" className="block text-sm font-medium text-neutral">
                     Hobbies / Interests / Skills
                   </label>
                   <div className="mt-1">
-                    <input type="text" id="hobbies" name="hobbies" value={volunteer ? volunteer.hobbies : hobbies} placeholder="Enter your Hobbies, Interests and Skills" className="input input-bordered w-full border-red-800" required disabled={disabled} />
+                    <input type="text" id="hobbies" name="hobbies" value={hobbies} placeholder={!volunteer.hobbies.length ? "Enter your Hobbies, Interests and Skills": volunteer.hobbies} className="input input-bordered w-full border-red-800" required disabled={disabled} onChange={onChange} />
                   </div>
                 </div>
 
