@@ -1,18 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { V_PROFILE } from '../constants/routes';
+import { O_PROFILE } from '../constants/routes';
 
 const OrganisationEvents = () => {
   const navigate = useNavigate();
 
-  const { volunteer } = useSelector((state) => state.volunteerauth);
+  const { organisation } = useSelector((state) => state.organisationauth);
 
   React.useEffect(() => {
-    if (!volunteer.introduction || !volunteer.hobbies.length) {
-      navigate(V_PROFILE);
+    if (!organisation.introduction || !organisation.hobbies.length) {
+      navigate(O_PROFILE);
     }
-  }, [volunteer, navigate]);
+  }, [organisation, navigate]);
   return (
     <div>OrganisationEvents</div>
   )
