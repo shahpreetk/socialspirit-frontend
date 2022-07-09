@@ -46,6 +46,20 @@ export const organisationLogin = createAsyncThunk('organisationauth/organisation
  }
 })
 
+// Update Organisation
+export const organisationUpdate = createAsyncThunk('organisationauth/organisationupdate', async (organisationData, thunkAPI) => {
+ try {
+   return await organisationauthService.organisationupdate(organisationData, organisation.token);
+ } catch (error) {
+   const message =
+     (error.response && error.response.data && error.response.data.message) ||
+     error.message ||
+     error.toString();
+
+   return thunkAPI.rejectWithValue(message);
+ }
+})
+
 // Logout Organisation
 export const organisationLogout = createAsyncThunk('organisationauth/organisationlogout', async () => {
   await organisationauthService.organisationlogout();
