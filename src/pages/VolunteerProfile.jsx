@@ -7,17 +7,20 @@ import Spinner from "../components/Spinner";
 import { HOME } from "../constants/routes";
 
 const VolunteerProfile = () => {
-  const [disabled, setDisabled] = React.useState(false);
-  const [formData, setFormData] = React.useState({
-    introduction: "",
-    hobbies: []
-  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { introduction, hobbies } = formData;
+
 
   const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
+
+  const [disabled, setDisabled] = React.useState(false);
+  const [formData, setFormData] = React.useState({
+    introduction: !volunteer.introduction ? "" : volunteer.introduction,
+    hobbies: !volunteer.hobbies ? "" : volunteer.hobbies.join(","),
+  });
+
+  const { introduction, hobbies } = formData;
 
   const isDisabled = e => {
     e.preventDefault();
@@ -29,11 +32,18 @@ const VolunteerProfile = () => {
   };
 
   const onChange = e => {
-    console.log(e.target.name);
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.name === "introduction") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
+    if (e.target.name === "hobbies") {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
 
   const onSubmit = e => {
@@ -61,7 +71,6 @@ const VolunteerProfile = () => {
     dispatch(volunteerreset());
   }, [isError, isSuccess, volunteer, message, navigate, dispatch]);
 
-console.log({introduction, hobbies});
   if (isLoading) {
     return <Spinner />;
   }
@@ -144,7 +153,7 @@ console.log({introduction, hobbies});
                     Hobbies / Interests / Skills
                   </label>
                   <div className="mt-1">
-                    <input type="text" id="hobbies" name="hobbies" value={hobbies} placeholder={!volunteer.hobbies.length ? "Enter your Hobbies, Interests and Skills": volunteer.hobbies} className="input input-bordered w-full border-red-800" required disabled={disabled} onChange={onChange} />
+                    <input type="text" id="hobbies" name="hobbies" value={hobbies} placeholder={!volunteer.hobbies.length ? "Enter your Hobbies, Interests and Skills" : volunteer.hobbies} className="input input-bordered w-full border-red-800" disabled={disabled} onChange={onChange} required />
                   </div>
                 </div>
 
