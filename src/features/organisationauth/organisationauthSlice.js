@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import organisationauthService from "./organisationauthService";
 
 // Get organisation from local storage
-const organisation =JSON.parse(localStorage.getItem("organisation"));
+const organisation = JSON.parse(localStorage.getItem("organisation"));
 
 const initialState = {
   organisation: organisation ? organisation : null,
@@ -11,7 +11,6 @@ const initialState = {
   isLoading: false,
   message: "",
 };
-
 
 // Register new Organisation
 export const organisationRegister = createAsyncThunk(
@@ -33,37 +32,54 @@ export const organisationRegister = createAsyncThunk(
 );
 
 // Login Organisation
-export const organisationLogin = createAsyncThunk('organisationauth/organisationlogin', async (organisation, thunkAPI) => {
- try {
-   return await organisationauthService.organisationlogin(organisation);
- } catch (error) {
-   const message =
-     (error.response && error.response.data && error.response.data.message) ||
-     error.message ||
-     error.toString();
+export const organisationLogin = createAsyncThunk(
+  "organisationauth/organisationlogin",
+  async (organisation, thunkAPI) => {
+    try {
+      return await organisationauthService.organisationlogin(organisation);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-   return thunkAPI.rejectWithValue(message);
- }
-})
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Update Organisation
-export const organisationUpdate = createAsyncThunk('organisationauth/organisationupdate', async (organisationData, thunkAPI) => {
- try {
-   return await organisationauthService.organisationupdate(organisationData, organisation.token);
- } catch (error) {
-   const message =
-     (error.response && error.response.data && error.response.data.message) ||
-     error.message ||
-     error.toString();
+export const organisationUpdate = createAsyncThunk(
+  "organisationauth/organisationupdate",
+  async (organisationData, thunkAPI) => {
+    try {
+      console.log(organisation.token);
+      return await organisationauthService.organisationupdate(
+        organisationData,
+        organisation.token
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-   return thunkAPI.rejectWithValue(message);
- }
-})
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Logout Organisation
-export const organisationLogout = createAsyncThunk('organisationauth/organisationlogout', async () => {
-  await organisationauthService.organisationlogout();
- })
+export const organisationLogout = createAsyncThunk(
+  "organisationauth/organisationlogout",
+  async () => {
+    await organisationauthService.organisationlogout();
+  }
+);
 
 export const organisationauthSlice = createSlice({
   name: "organisationauth",
@@ -74,7 +90,7 @@ export const organisationauthSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -109,6 +125,20 @@ export const organisationauthSlice = createSlice({
         state.message = action.payload;
         state.organisation = null;
       })
+      .addCase(organisationUpdate.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(organisationUpdate.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.organisation = action.payload;
+      })
+      .addCase(organisationUpdate.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.organisation = null;
+      });
   },
 });
 

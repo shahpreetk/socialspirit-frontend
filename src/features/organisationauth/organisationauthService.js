@@ -21,6 +21,7 @@ const organisationlogin = async (organisationData) => {
 
 // Update organisation profile
 const organisationupdate = async (organisationData, organisationToken) => {
+  console.log(organisationToken)
   const response = await axios.patch(UPDATE_URL, organisationData, {
     'headers': {
       'Authorization': `Bearer ${organisationToken}`

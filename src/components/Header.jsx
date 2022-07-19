@@ -17,12 +17,13 @@ const Header = () => {
     if (volunteer) {
       dispatch(volunteerLogout());
       dispatch(volunteerreset());
+      navigate(ROUTES.V_LOGIN);
     }
     if (organisation) {
       dispatch(organisationLogout());
       dispatch(organisationreset());
+      navigate(ROUTES.O_LOGIN);
     }
-    navigate(ROUTES.V_LOGIN);
   };
 
   return (

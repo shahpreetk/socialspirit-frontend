@@ -11,7 +11,7 @@ const Home = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('organisation')) {
-      if (!organisation.introduction || !organisation.hobbies.length) {
+      if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
         navigate(O_PROFILE);
       }
     }

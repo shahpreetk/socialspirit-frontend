@@ -10,21 +10,21 @@ const OrganisationProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-
   const { organisation, isLoading, isSuccess, isError, message } = useSelector((state) => state.organisationauth);
 
   const [disabled, setDisabled] = React.useState(false);
   const [formData, setFormData] = React.useState({
-    introduction: !organisation.introduction ? "" : organisation.introduction,
-    hobbies: !organisation.hobbies ? "" : organisation.hobbies.join(","),
+    description: !organisation.description ? "" : organisation.description,
+    city: !organisation.city ? "" : organisation.city,
+    state: !organisation.state ? "" : organisation.state,
+    country: !organisation.country ? "" : organisation.country,
   });
 
-  const { introduction, hobbies } = formData;
+  const { description, city, state, country } = formData;
 
   const isDisabled = e => {
     e.preventDefault();
-    if (!organisation.introduction || !organisation.hobbies.length) {
+    if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
       toast.error("Please fill in all fields");
     } else {
       setDisabled(!disabled);
@@ -42,14 +42,16 @@ const OrganisationProfile = () => {
   const onSubmit = e => {
     e.preventDefault();
     const organisationData = {
-      introduction,
-      hobbies,
+      description,
+      city,
+      state,
+      country
     };
     dispatch(organisationUpdate(organisationData));
   };
 
   React.useEffect(() => {
-    if (organisation.introduction || organisation.hobbies) {
+    if (organisation.description || organisation.city || organisation.state || organisation.country) {
       setDisabled(true);
     }
     if (isError) {
@@ -87,8 +89,8 @@ const OrganisationProfile = () => {
 
 
                 <div className="sm:col-span-6">
-                  <label htmlFor="photo" className="block text-sm font-medium text-neutral">
-                    Profile Photo
+                  <label htmlFor="logo" className="block text-sm font-medium text-neutral">
+                    Organisation Logo
                   </label>
                   <div className="mt-2 flex items-center">
                     <span className="h-12 w-12 rounded-full overflow-hidden bg-base-100 border border-red-800">
@@ -107,17 +109,17 @@ const OrganisationProfile = () => {
 
                 <div className="sm:col-span-3">
                   <label className="label">
-                    <span className="label-text">First Name</span>
+                    <span className="label-text">Organisation Name</span>
                   </label>
-                  <input type="text" id="fname" name="name" placeholder={!organisation ? "Enter your First Name" : null} value={organisation.name.split(" ")[0]} className="input input-bordered w-full border-red-800" disabled />
+                  <input type="text" id="name" name="name" placeholder={!organisation ? "Enter Organisation Name" : null} value={organisation.name} className="input input-bordered w-full border-red-800" disabled />
 
                 </div>
 
                 <div className="sm:col-span-3">
                   <label className="label">
-                    <span className="label-text">Last Name</span>
+                    <span className="label-text">Organisation Website</span>
                   </label>
-                  <input type="text" id="lname" name="name" placeholder={!organisation ? "Enter your Last Name" : null} value={organisation.name.split(" ")[1]} className="input input-bordered w-full border-red-800" disabled />
+                  <input type="text" id="website" name="website" placeholder={!organisation ? "Enter Organisation Website" : null} value={organisation.website} className="input input-bordered w-full border-red-800" disabled />
 
                 </div>
 
@@ -126,28 +128,41 @@ const OrganisationProfile = () => {
                     Email address
                   </label>
                   <div className="mt-1">
-                    <input type="email" id="email" name="email" placeholder={!organisation ? "Enter your Email Address" : null} value={organisation.email} className="input input-bordered w-full border-red-800" disabled />
+                    <input type="email" id="email" name="email" placeholder={!organisation ? "Enter Organisation Email Address" : null} value={organisation.email} className="input input-bordered w-full border-red-800" disabled />
                   </div>
                 </div>
 
                 <div className="sm:col-span-6">
-                  <label htmlFor="introduction" className="block text-sm font-medium text-neutral">
-                    Introduction
+                  <label htmlFor="description" className="block text-sm font-medium text-neutral">
+                    Description
                   </label>
                   <div className="mt-1">
 
-                    <textarea className="textarea input-bordered border-red-800 w-full" rows={3} id="introduction"
-                      name="introduction" value={introduction} placeholder={!organisation.introduction ? "Write a few sentences about yourself." : organisation.introduction} required disabled={disabled} onChange={onChange}></textarea>
+                    <textarea className="textarea input-bordered border-red-800 w-full" rows={3} id="description"
+                      name="description" value={description} placeholder={!organisation.description ? "Write a few sentences about yourself." : organisation.description} required disabled={disabled} onChange={onChange}></textarea>
                   </div>
                 </div>
 
-                <div className="sm:col-span-6">
-                  <label htmlFor="hobbies" className="block text-sm font-medium text-neutral">
-                    Hobbies / Interests / Skills
+                <div className="sm:col-span-2">
+                  <label className="label">
+                    <span className="label-text">City</span>
                   </label>
-                  <div className="mt-1">
-                    <input type="text" id="hobbies" name="hobbies" value={hobbies} placeholder={!organisation.hobbies ? "Enter your Hobbies, Interests and Skills" : organisation.hobbies} className="input input-bordered w-full border-red-800" disabled={disabled} onChange={onChange} required />
-                  </div>
+                  <input type="text" id="city" name="city" value={city} placeholder={!organisation.city ? "Enter City" : organisation.city} className="input input-bordered w-full border-red-800" disabled={disabled} onChange={onChange} required />
+
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="label">
+                    <span className="label-text">State</span>
+                  </label>
+                  <input type="text" id="state" name="state" value={state} placeholder={!organisation.state ? "Enter State" : organisation.state} className="input input-bordered w-full border-red-800" disabled={disabled} onChange={onChange} required />
+
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="label">
+                    <span className="label-text">Country</span>
+                  </label>
+                  <input type="text" id="country" name="country" value={country} placeholder={!organisation.country ? "Enter Country" : organisation.country} className="input input-bordered w-full border-red-800" disabled={disabled} onChange={onChange} required />
+
                 </div>
 
               </div>
