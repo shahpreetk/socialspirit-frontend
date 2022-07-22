@@ -12,6 +12,7 @@ import VolunteerProfile from "./pages/VolunteerProfile";
 import OrganisationProfile from "./pages/OrganisationProfile";
 import VolunteerEvents from "./pages/VolunteerEvents";
 import OrganisationEvents from "./pages/OrganisationEvents";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path={ROUTES.O_EVENTS} element={<OrganisationEvents />} />
           </Routes>
         </div>
+        <Footer/>
       </Router>
       <ToastContainer />
     </>
