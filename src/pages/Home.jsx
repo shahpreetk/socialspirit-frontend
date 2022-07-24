@@ -29,7 +29,6 @@ const Home = () => {
         <div>
           <div className="flex flex-col text-center items-center">
             <h6 className="text-4xl font-bold mx-2 mb-6">Easily find <span className="text-primary-focus">volunteering events of your interests</span> in your area!</h6>
-            {/* <p className="py-6 text-2xl">Easily find </p> */}
             <div className="form-control">
               <div className="input-group">
                 <input type="text" placeholder="Search…" className="input input-bordered md:w-96 " />
@@ -38,8 +37,71 @@ const Home = () => {
                 </button>
               </div>
             </div>
+            </div>
+          </div>
+      </div>
+      <div className="flex flex-row flex-wrap mt-8 gap-10  justify-evenly">
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
           </div>
         </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+          <div className="card-body">
+            <h2 className="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </>
   );

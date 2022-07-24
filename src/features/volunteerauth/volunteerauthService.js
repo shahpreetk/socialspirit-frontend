@@ -23,6 +23,7 @@ const volunteerlogin = async (volunteerData) => {
 const volunteerupdate = async (volunteerData, volunteerToken) => {
   const response = await axios.patch(UPDATE_URL, volunteerData, {
     'headers': {
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${volunteerToken}`
     }
   });

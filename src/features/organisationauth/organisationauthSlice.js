@@ -55,7 +55,6 @@ export const organisationUpdate = createAsyncThunk(
   "organisationauth/organisationupdate",
   async (organisationData, thunkAPI) => {
     try {
-      console.log(organisation.token);
       return await organisationauthService.organisationupdate(
         organisationData,
         organisation.token
