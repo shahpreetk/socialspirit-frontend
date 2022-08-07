@@ -2,7 +2,6 @@ import React from 'react';
 import EventCard from "./EventCard";
 
 const EventCardsList = ({events}) => {
-console.log(events);
   return (
     <>
       <div className="flex flex-row flex-wrap mt-8 gap-10 justify-evenly">

@@ -64,8 +64,8 @@ const Header = () => {
                       <FaAngleDown />
                     </a>
                     <ul className="p-2 bg-base-200">
-                      <li><Link to={ROUTES.O_EVENTS}>Upcoming Events</Link></li>
-                      <li><Link to={ROUTES.O_EVENTS}>Past Events</Link></li>
+                      <li><Link to={ROUTES.O_UPCOMING_EVENTS}>Upcoming Events</Link></li>
+                      <li><Link to={ROUTES.O_PAST_EVENTS}>Past Events</Link></li>
                     </ul>
                   </li>
                   <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
@@ -113,8 +113,8 @@ const Header = () => {
                     <FaAngleDown />
                   </a>
                   <ul className="p-2 bg-base-200">
-                    <li><Link to={ROUTES.O_EVENTS}>Upcoming Events</Link></li>
-                    <li><Link to={ROUTES.O_EVENTS}>Past Events</Link></li>
+                    <li><Link to={ROUTES.O_UPCOMING_EVENTS}>Upcoming Events</Link></li>
+                    <li><Link to={ROUTES.O_PAST_EVENTS}>Past Events</Link></li>
                   </ul>
                 </li>
                 <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
