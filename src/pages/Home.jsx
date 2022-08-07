@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { V_PROFILE, O_PROFILE } from '../constants/routes';
 import { IoSearch } from "react-icons/io5";
+import EventCardsList from "../components/EventCardsList";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -37,72 +38,12 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            </div>
           </div>
+        </div>
       </div>
-      <div className="flex flex-row flex-wrap mt-8 gap-10  justify-evenly">
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
 
-      </div>
+      <EventCardsList />
+
     </>
   );
 };
