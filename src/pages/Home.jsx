@@ -1,17 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { V_PROFILE, O_PROFILE } from '../constants/routes';
 import { IoSearch } from "react-icons/io5";
 import EventCardsList from "../components/EventCardsList";
+import { getAllEvents } from "../features/eventauth/eventauthSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
   const { organisation } = useSelector((state) => state.organisationauth);
+  const { events } = useSelector((state) => state.eventauth);
 
   React.useEffect(() => {
+    dispatch(getAllEvents());
     if (localStorage.getItem('organisation')) {
       if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
         navigate(O_PROFILE);
@@ -22,7 +26,9 @@ const Home = () => {
         navigate(V_PROFILE);
       }
     }
-  }, [organisation, navigate, volunteer]);
+  }, [organisation, navigate, volunteer, dispatch]);
+
+console.log(events);
 
   return (
     <>
@@ -41,9 +47,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       <EventCardsList />
-
     </>
   );
 };
