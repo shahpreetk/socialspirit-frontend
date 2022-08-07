@@ -1,9 +1,9 @@
-import { FaBars, FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaAngleDown, FaBars, FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { volunteerLogout, volunteerreset } from "../features/volunteerauth/volunteerauthSlice";
 import { organisationLogout, organisationreset } from "../features/organisationauth/organisationauthSlice";
-import * as ROUTES from '../constants/routes'
+import * as ROUTES from '../constants/routes';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -38,22 +38,43 @@ const Header = () => {
               {volunteer ? (
                 <>
                   <li><Link to={ROUTES.HOME}>Events</Link></li>
-                  <li><Link to={ROUTES.V_EVENTS}>My Events</Link></li>
+                  <li tabIndex="0">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href="#" className="justify-between">
+                      My Events
+                      <FaAngleDown />
+                    </a>
+                    <ul className="p-2 bg-base-200">
+                      <li><Link to={ROUTES.V_EVENTS}>Applied Events</Link></li>
+                      <li><Link to={ROUTES.V_EVENTS}>Accepted Events</Link></li>
+                      <li><Link to={ROUTES.V_EVENTS}>Rejected Events</Link></li>
+                    </ul>
+                  </li>
                   <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
                   <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
                   </li>
                 </>
               ) : organisation ? (
-              <>
-                <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to={ROUTES.O_EVENTS}>My Events</Link></li>
-                <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
-                <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
-                </li>
-              </>
-            ) : (<>
+                <>
+                  <li><Link to={ROUTES.HOME}>Events</Link></li>
+                  <li tabIndex="0">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href="#" className="justify-between">
+                      My Events
+                      <FaAngleDown />
+                    </a>
+                    <ul className="p-2 bg-base-200">
+                      <li><Link to={ROUTES.O_EVENTS}>Upcoming Events</Link></li>
+                      <li><Link to={ROUTES.O_EVENTS}>Past Events</Link></li>
+                    </ul>
+                  </li>
+                  <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
+                  <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
+                  </li>
+                </>
+              ) : (<>
                 <li><Link to={ROUTES.V_LOGIN}><FaSignInAlt />Login</Link></li>
-                  <li><Link to={ROUTES.V_REGISTER}><FaUser />Register</Link></li>
+                <li><Link to={ROUTES.V_REGISTER}><FaUser />Register</Link></li>
               </>)}
 
             </ul>
@@ -65,8 +86,19 @@ const Header = () => {
             {volunteer ? (
               <>
 
-                <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to={ROUTES.V_EVENTS}>My Events</Link></li>
+                <li><Link to={ROUTES.HOME}>All Events</Link></li>
+                <li tabIndex="0">
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                  <a href="#" className="justify-between">
+                    My Events
+                    <FaAngleDown />
+                  </a>
+                  <ul className="p-2 bg-base-200">
+                    <li><Link to={ROUTES.V_EVENTS}>Applied Events</Link></li>
+                    <li><Link to={ROUTES.V_EVENTS}>Accepted Events</Link></li>
+                    <li><Link to={ROUTES.V_EVENTS}>Rejected Events</Link></li>
+                  </ul>
+                </li>
                 <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({volunteer.name})</button>
                 </li>
@@ -74,7 +106,17 @@ const Header = () => {
             ) : organisation ? (
               <>
                 <li><Link to={ROUTES.HOME}>Events</Link></li>
-                <li><Link to={ROUTES.O_EVENTS}>My Events</Link></li>
+                <li tabIndex="0">
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                  <a href="#" className="justify-between">
+                    My Events
+                    <FaAngleDown />
+                  </a>
+                  <ul className="p-2 bg-base-200">
+                    <li><Link to={ROUTES.O_EVENTS}>Upcoming Events</Link></li>
+                    <li><Link to={ROUTES.O_EVENTS}>Past Events</Link></li>
+                  </ul>
+                </li>
                 <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
                 <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                 </li>
