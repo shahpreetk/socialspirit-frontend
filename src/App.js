@@ -10,7 +10,9 @@ import OrganisationLogin from "./pages/OrganisationLogin";
 import OrganisationRegister from "./pages/OrganisationRegister";
 import VolunteerProfile from "./pages/VolunteerProfile";
 import OrganisationProfile from "./pages/OrganisationProfile";
-import VolunteerEvents from "./pages/VolunteerEvents";
+import VolunteerAppliedEvents from "./pages/VolunteerAppliedEvents";
+import VolunteerAcceptedEvents from "./pages/VolunteerAcceptedEvents";
+import VolunteerRejectedEvents from "./pages/VolunteerRejectedEvents";
 import OrganisationPastEvents from "./pages/OrganisationPastEvents";
 import OrganisationUpcomingEvents from "./pages/OrganisationUpcomingEvents";
 import Footer from "./components/Footer";
@@ -32,12 +34,29 @@ function App() {
             />
             <Route path={ROUTES.V_PROFILE} element={<VolunteerProfile />} />
             <Route path={ROUTES.O_PROFILE} element={<OrganisationProfile />} />
-            <Route path={ROUTES.V_EVENTS} element={<VolunteerEvents />} />
-            <Route path={ROUTES.O_PAST_EVENTS} element={<OrganisationPastEvents />} />
-            <Route path={ROUTES.O_UPCOMING_EVENTS} element={<OrganisationUpcomingEvents />} />
+            <Route
+              path={ROUTES.V_APPLIED_EVENTS}
+              element={<VolunteerAppliedEvents />}
+            />
+            <Route
+              path={ROUTES.V_ACCEPTED_EVENTS}
+              element={<VolunteerAcceptedEvents />}
+            />
+            <Route
+              path={ROUTES.V_REJECTED_EVENTS}
+              element={<VolunteerRejectedEvents />}
+            />
+            <Route
+              path={ROUTES.O_PAST_EVENTS}
+              element={<OrganisationPastEvents />}
+            />
+            <Route
+              path={ROUTES.O_UPCOMING_EVENTS}
+              element={<OrganisationUpcomingEvents />}
+            />
           </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </Router>
       <ToastContainer />
     </>

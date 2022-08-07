@@ -45,9 +45,9 @@ const Header = () => {
                       <FaAngleDown />
                     </a>
                     <ul className="p-2 bg-base-200">
-                      <li><Link to={ROUTES.V_EVENTS}>Applied Events</Link></li>
-                      <li><Link to={ROUTES.V_EVENTS}>Accepted Events</Link></li>
-                      <li><Link to={ROUTES.V_EVENTS}>Rejected Events</Link></li>
+                      <li><Link to={ROUTES.V_APPLIED_EVENTS}>Applied Events</Link></li>
+                      <li><Link to={ROUTES.V_ACCEPTED_EVENTS}>Accepted Events</Link></li>
+                      <li><Link to={ROUTES.V_REJECTED_EVENTS}>Rejected Events</Link></li>
                     </ul>
                   </li>
                   <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
@@ -94,9 +94,9 @@ const Header = () => {
                     <FaAngleDown />
                   </a>
                   <ul className="p-2 bg-base-200">
-                    <li><Link to={ROUTES.V_EVENTS}>Applied Events</Link></li>
-                    <li><Link to={ROUTES.V_EVENTS}>Accepted Events</Link></li>
-                    <li><Link to={ROUTES.V_EVENTS}>Rejected Events</Link></li>
+                    <li><Link to={ROUTES.V_APPLIED_EVENTS}>Applied Events</Link></li>
+                    <li><Link to={ROUTES.V_ACCEPTED_EVENTS}>Accepted Events</Link></li>
+                    <li><Link to={ROUTES.V_REJECTED_EVENTS}>Rejected Events</Link></li>
                   </ul>
                 </li>
                 <li><Link to={ROUTES.V_PROFILE}>Profile</Link></li>
