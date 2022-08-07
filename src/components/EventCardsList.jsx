@@ -1,13 +1,16 @@
 import React from 'react';
 import EventCard from "./EventCard";
 
-const EventCardsList = () => {
+const EventCardsList = ({events}) => {
+console.log(events);
   return (
     <>
       <div className="flex flex-row flex-wrap mt-8 gap-10 justify-evenly">
-        <EventCard/>
-        <EventCard/>
-        <EventCard/>
+        {
+          events.map((event) =>
+            <EventCard key={event._id} event={event} />
+          )
+       }
       </div>
     </>
   );

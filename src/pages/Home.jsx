@@ -28,8 +28,6 @@ const Home = () => {
     }
   }, [organisation, navigate, volunteer, dispatch]);
 
-console.log(events);
-
   return (
     <>
       <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
@@ -47,7 +45,7 @@ console.log(events);
           </div>
         </div>
       </div>
-      <EventCardsList />
+      <EventCardsList events={events} />
     </>
   );
 };
