@@ -1,18 +1,23 @@
 import React from 'react';
 import EventCard from "./EventCard";
 
-const EventCardsList = ({events}) => {
+const EventCardsList = ({ events }) => {
   return (
     <>
-      <div className="flex flex-row flex-wrap mt-8 gap-10 justify-evenly">
+      <div className="grid grid-cols-12 gap-4 mt-8">
         {
           events.map((event) =>
-            <EventCard key={event._id} event={event} />
+            <div
+              key={event._id}
+              className="col-span-12 md:col-span-5 lg:col-span-4"
+            >
+              <EventCard event={event} />
+            </div>
           )
-       }
+        }
       </div>
     </>
   );
 };
 
-export default EventCardsList;
+export default EventCardsList;;

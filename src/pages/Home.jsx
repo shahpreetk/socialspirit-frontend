@@ -9,13 +9,24 @@ import { getAllEvents } from "../features/eventauth/eventauthSlice";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [upcomingEvents, setUpcomingEvents] = React.useState([]);
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
   const { organisation } = useSelector((state) => state.organisationauth);
   const { events } = useSelector((state) => state.eventauth);
 
-  React.useEffect(() => {
+  const getUpcomingEvents = () => {
     dispatch(getAllEvents());
+    const upcoming = events.filter((event) => {
+      const date = new Date(event.date);
+      const today = new Date();
+      return date > today;
+    })
+    setUpcomingEvents(upcoming);
+  }
+
+  React.useEffect(() => {
+    getUpcomingEvents();
     if (localStorage.getItem('organisation')) {
       if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
         navigate(O_PROFILE);
@@ -26,7 +37,8 @@ const Home = () => {
         navigate(V_PROFILE);
       }
     }
-  }, [organisation, navigate, volunteer, dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [organisation, navigate, volunteer]);
 
   return (
     <>
@@ -45,7 +57,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <EventCardsList events={events} />
+      <EventCardsList events={upcomingEvents} />
     </>
   );
 };
