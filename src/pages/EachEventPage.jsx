@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import VolunteersInterestedTable from "../components/VolunteersInterestedTable";
+import RateVolunteersTable from "../components/RateVolunteersTable";
 
 const EachEventPage = () => {
   let params = useParams();
 
   const [event, setEvent] = useState({});
 
+  const { organisation } = useSelector((state) => state.organisationauth);
   const { events } = useSelector((state) => state.eventauth);
 
   useEffect(() => {
@@ -21,14 +24,7 @@ const EachEventPage = () => {
 
   return (
     <>
-      {/* <div className="hero min-h-full lg:mt-5 align-start bg-base-100 py-5">
-          <div className="flex flex-col text-left items-start">
-          <h3 className="text-xl font-bold mx-2 mb-6">{event.ownerName}</h3>
-          <h3 className="text-xl font-bold mx-2 mb-6">{event.ownerName}</h3>
-          </div>
-      </div> */}
-      <div className="relative py-16 overflow-hidden">
-
+      <div className="py-16 overflow-hidden">
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-lg max-w-prose mx-auto">
             <h1>
@@ -60,11 +56,22 @@ const EachEventPage = () => {
               />
 
             </figure>
-            <h3>Event Description</h3>
+            <h3 className="text-lg">Event Description</h3>
             <p>
               {event.description}
+              <br />
+              Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget
+              aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend
+              egestas fringilla sapien.
             </p>
           </div>
+          {organisation && new Date(event.date) > new Date() && (
+          <VolunteersInterestedTable event={event} />
+          )}
+          {organisation && new Date(event.date) < new Date() && (
+          <RateVolunteersTable event={event} />
+          )}
+
         </div>
       </div>
     </>

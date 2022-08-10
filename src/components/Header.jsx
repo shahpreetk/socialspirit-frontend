@@ -34,7 +34,7 @@ const Header = () => {
             <label tabIndex="0" className="btn btn-ghost lg:hidden">
               <FaBars size={18} />
             </label>
-            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 h-48">
               {volunteer ? (
                 <>
                   <li><Link to={ROUTES.HOME}>Events</Link></li>
@@ -118,7 +118,7 @@ const Header = () => {
                   </ul>
                 </li>
                 <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
-                <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
+                  <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                 </li>
               </>
             ) : (<>
