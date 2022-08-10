@@ -1,5 +1,6 @@
 export const HOME = "/";
-export const EACH_EVENT = "/:id";
+export const ALL_EVENTS = "/events";
+export const EACH_EVENT = "/events/:id";
 export const V_LOGIN = "/v/login";
 export const V_REGISTER = "/v/register";
 export const O_LOGIN = "/o/login";

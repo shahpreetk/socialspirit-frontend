@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HOME } from "../constants/routes";
+import { ALL_EVENTS } from "../constants/routes";
 
 const EventCard = ({ event }) => {
   return (
     <>
       <div className="card w-auto bg-base-100 shadow-md border-2 border-base-200 mx-6 md:mx-0">
         <div className="card-body grid grid-flow-col p-4 items-baseline">
-          <Link to={`${HOME}${event._id}`} className="hover:underline">
+          <Link to={`${ALL_EVENTS}/${event._id}`} className="hover:underline">
             <h2 className="card-title">{event.name}</h2>
           </Link>
           <p className="text-right align-middle">{new Date(event.date).toString().slice(0, 21)}</p>
