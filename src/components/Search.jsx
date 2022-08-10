@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoSearch } from "react-icons/io5";
 
-const Search = ({ search, searchChange, searchNow, handleKeyDown }) => {
+const Search = ({ search, searchChange, searchNow, handleEnterKey }) => {
   return (
     <>
       <div className="form-control">
@@ -11,7 +11,7 @@ const Search = ({ search, searchChange, searchNow, handleKeyDown }) => {
             id="search"
             value={search}
             onChange={searchChange}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleEnterKey}
             aria-autocomplete="none"
             autoComplete="off" placeholder="Search…" className="input input-bordered md:w-96 " />
           <button className="btn btn-square" onClick={searchNow}>

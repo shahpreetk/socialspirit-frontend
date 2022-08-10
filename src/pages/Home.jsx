@@ -42,8 +42,13 @@ const Home = () => {
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+  /**
+   * @desc Searching events on press of enter key
+   * {@link https://stackoverflow.com/a/31273404/15466726}
+   * @author wuct
+   */
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
       searchNow();
     }
   }
@@ -97,7 +102,7 @@ const Home = () => {
         <div>
           <div className="flex flex-col text-center items-center">
             <h6 className="text-4xl font-bold mx-2 mb-6">Easily find <span className="text-primary-focus">volunteering events of your interests</span> in your area!</h6>
-            <Search search={search} searchChange={searchChange} searchNow={searchNow} handleKeyDown={handleKeyDown} />
+            <Search search={search} searchChange={searchChange} searchNow={searchNow} handleEnterKey={handleEnterKey} />
           </div>
         </div>
       </div>
