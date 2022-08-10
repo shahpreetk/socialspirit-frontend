@@ -12,4 +12,5 @@ export const V_ACCEPTED_EVENTS = "/v/accepted-events";
 export const V_REJECTED_EVENTS = "/v/rejected-events";
 export const O_PAST_EVENTS = "/o/past-events";
 export const O_UPCOMING_EVENTS = "/o/upcoming-events";
+export const O_CREATE_EVENT = "/o/new-event";
 export const NOT_FOUND = "/not-found";

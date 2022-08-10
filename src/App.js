@@ -16,6 +16,7 @@ import VolunteerRejectedEvents from "./pages/VolunteerRejectedEvents";
 import OrganisationPastEvents from "./pages/OrganisationPastEvents";
 import OrganisationUpcomingEvents from "./pages/OrganisationUpcomingEvents";
 import EachEventPage from "./pages/EachEventPage";
+import CreateEvent from "./pages/CreateEvent";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
@@ -60,6 +61,10 @@ function App() {
             <Route
               path={ROUTES.O_UPCOMING_EVENTS}
               element={<OrganisationUpcomingEvents />}
+            />
+            <Route
+              path={ROUTES.O_CREATE_EVENT}
+              element={<CreateEvent />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
