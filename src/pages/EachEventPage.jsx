@@ -65,10 +65,10 @@ const EachEventPage = () => {
               egestas fringilla sapien.
             </p>
           </div>
-          {organisation && new Date(event.date) > new Date() && (
+          {organisation.name === event.ownerName && new Date(event.date) > new Date() && (
           <VolunteersInterestedTable event={event} />
           )}
-          {organisation && new Date(event.date) < new Date() && (
+          {organisation.name === event.ownerName && new Date(event.date) < new Date() && (
           <RateVolunteersTable event={event} />
           )}
 
