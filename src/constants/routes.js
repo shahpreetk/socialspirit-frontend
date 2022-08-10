@@ -1,3 +1,5 @@
+export const HOME = "/";
+export const EACH_EVENT = "/:id";
 export const V_LOGIN = "/v/login";
 export const V_REGISTER = "/v/register";
 export const O_LOGIN = "/o/login";
@@ -10,4 +12,3 @@ export const V_REJECTED_EVENTS = "/v/rejected-events";
 export const O_PAST_EVENTS = "/o/past-events";
 export const O_UPCOMING_EVENTS = "/o/upcoming-events";
 export const NOT_FOUND = "/not-found";
-export const HOME = "/";

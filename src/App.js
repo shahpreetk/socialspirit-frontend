@@ -15,6 +15,7 @@ import VolunteerAcceptedEvents from "./pages/VolunteerAcceptedEvents";
 import VolunteerRejectedEvents from "./pages/VolunteerRejectedEvents";
 import OrganisationPastEvents from "./pages/OrganisationPastEvents";
 import OrganisationUpcomingEvents from "./pages/OrganisationUpcomingEvents";
+import EachEventPage from "./pages/EachEventPage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <div className="container mx-auto">
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.EACH_EVENT} element={<EachEventPage />} />
             <Route path={ROUTES.V_LOGIN} element={<VolunteerLogin />} />
             <Route path={ROUTES.O_LOGIN} element={<OrganisationLogin />} />
             <Route path={ROUTES.V_REGISTER} element={<VolunteerRegister />} />
