@@ -3,9 +3,16 @@ import eventauthService from "./eventauthService";
 
 // Get events from local storage
 const events = JSON.parse(localStorage.getItem("events"));
+// Get organisation token from local storage
+const organisationToken = JSON.parse(localStorage.getItem("organisation")).token;
+// Get organisation name from local storage
+const organisationName = JSON.parse(localStorage.getItem("organisation")).name;
+// Get organisation ID from local storage
+const organisationId = JSON.parse(localStorage.getItem("organisation"))._id;
 
 const initialState = {
   events: events ? events : null,
+  event: '',
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -17,7 +24,12 @@ export const addEvent = createAsyncThunk(
   "eventauth/addevent",
   async (event, thunkAPI) => {
     try {
-      return await eventauthService.addevent(event);
+      event = {
+        ...event,
+        eventOwnerId: organisationId,
+        eventOwnerName: organisationName,
+      }
+      return await eventauthService.addevent(event, organisationToken);
     } catch (error) {
       const message =
         (error.response &&
@@ -70,13 +82,13 @@ export const eventauthSlice = createSlice({
       .addCase(addEvent.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.events = null;
+        state.event = action.payload;
       })
       .addCase(addEvent.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.events = null;
+        state.event = null;
       })
       .addCase(getAllEvents.pending, (state) => {
         state.isLoading = true;

@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { O_PROFILE } from '../constants/routes';
+import { getAllEvents } from "../features/eventauth/eventauthSlice";
 import EventCardsList from "../components/EventCardsList";
 import { IoSearch } from "react-icons/io5";
 
 const OrganisationEvents = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [upcomingEvents, setUpcomingEvents] = React.useState([]);
 
@@ -13,6 +15,7 @@ const OrganisationEvents = () => {
   const { events } = useSelector((state) => state.eventauth);
 
   const getUpcomingEvents = () => {
+    dispatch(getAllEvents());
     const upcoming = events.filter((event) => {
       const date = new Date(event.date);
       const today = new Date();

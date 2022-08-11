@@ -1,17 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { organisationUpdate, organisationreset } from "../features/organisationauth/organisationauthSlice";
+import { addEvent, eventreset } from "../features/eventauth/eventauthSlice";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
-import { HOME } from "../constants/routes";
-import { MdOutlineAddPhotoAlternate } from 'react-icons/md'
+import { O_UPCOMING_EVENTS } from "../constants/routes";
+import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
 
 const CreateEvent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { organisation, isLoading, isSuccess, isError, message } = useSelector((state) => state.organisationauth);
+  const { event, isLoading, isSuccess, isError, message } = useSelector((state) => state.eventauth);
 
   // const [disabled, setDisabled] = React.useState(false);
   const [formData, setFormData] = React.useState({
@@ -27,15 +27,6 @@ const CreateEvent = () => {
   });
 
   const { eventName, eventDate, eventDescription, eventDuration, eventMaxVolunteers, city, districtCode, eventSocialMedia, eventTags } = formData;
-
-  // const isDisabled = e => {
-  //   e.preventDefault();
-  //   if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
-  //     toast.error("Please fill in all fields");
-  //   } else {
-  //     setDisabled(!disabled);
-  //   }
-  // };
 
   const onChange = e => {
     setFormData((prevState) => ({
@@ -55,27 +46,24 @@ const CreateEvent = () => {
       description: eventDescription,
       city,
       districtCode,
-      socialMedia: eventSocialMedia,
+      socialMediaLink: eventSocialMedia,
       tags: eventTags
     };
-    dispatch(organisationUpdate(eventData));
+    dispatch(addEvent(eventData));
   };
 
   React.useEffect(() => {
-    // if (organisation.description || organisation.city || organisation.state || organisation.country) {
-    //   setDisabled(true);
-    // }
     if (isError) {
       toast.error(message);
     }
 
     // Redirect when logged in
-    if (isSuccess && organisation) {
-      navigate(HOME);
+    if (isSuccess && event) {
+      navigate(O_UPCOMING_EVENTS);
     }
 
-    dispatch(organisationreset());
-  }, [isError, isSuccess, organisation, message, navigate, dispatch]);
+    dispatch(eventreset());
+  }, [isError, isSuccess, message, event, navigate, dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -100,7 +88,7 @@ const CreateEvent = () => {
                   <label className="label">
                     <span className="label-text">Event Name</span>
                   </label>
-                  <input type="text" id="name" name="name" placeholder="Enter Event Name" value={eventName} onChange={onChange} className="input input-bordered w-full border-red-800" />
+                  <input type="text" id="eventName" name="eventName" placeholder="Enter Event Name" value={eventName} onChange={onChange} className="input input-bordered w-full border-red-800" required />
 
                 </div>
 
@@ -108,7 +96,7 @@ const CreateEvent = () => {
                   <label className="label">
                     <span className="label-text">Event Date &amp; Time</span>
                   </label>
-                  <input type="text" id="eventDate" name="eventDate" placeholder="YYYY-MM-DD HH:mm" value={eventDate} onChange={onChange} className="input input-bordered w-full border-red-800" />
+                  <input type="text" id="eventDate" name="eventDate" placeholder="YYYY-MM-DD HH:mm" value={eventDate} onChange={onChange} className="input input-bordered w-full border-red-800" required />
 
                 </div>
 
@@ -116,7 +104,7 @@ const CreateEvent = () => {
                   <label className="label">
                     <span className="label-text">Event Duration</span>
                   </label>
-                  <input type="text" id="eventDuration" name="eventDuration" placeholder="Enter Event Duration (in hours)" value={eventDuration} onChange={onChange} className="input input-bordered w-full border-red-800" />
+                  <input type="text" id="eventDuration" name="eventDuration" placeholder="Enter Event Duration (in hours)" value={eventDuration} onChange={onChange} className="input input-bordered w-full border-red-800" required />
 
                 </div>
 
@@ -159,11 +147,11 @@ const CreateEvent = () => {
                 </div>
 
                 <div className="sm:col-span-6">
-                  <label htmlFor="hobbies" className="block text-sm font-medium text-neutral">
+                  <label htmlFor="eventTags" className="block text-sm font-medium text-neutral">
                     Event Tags
                   </label>
                   <div className="mt-1">
-                    <input type="text" id="hobbies" name="hobbies" value={eventTags} placeholder="Enter tags related to the event (sperated by commas)" className="input input-bordered w-full border-red-800" onChange={onChange} required />
+                    <input type="text" id="eventTags" name="eventTags" value={eventTags} placeholder="Enter tags related to the event (sperated by commas)" className="input input-bordered w-full border-red-800" onChange={onChange} required />
                   </div>
                 </div>
 
@@ -173,7 +161,7 @@ const CreateEvent = () => {
                   </label>
                   <div className="mt-1">
                     <input type="text" id="eventSocialMedia" name="eventSocialMedia" placeholder="Enter Event social media link" value={eventSocialMedia} onChange={onChange}
-                    className="input input-bordered w-full border-red-800" />
+                      className="input input-bordered w-full border-red-800" required />
                   </div>
                 </div>
 
