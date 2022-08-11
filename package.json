@@ -1,7 +1,7 @@
 {
   "name": "socialspirit-frontend",
   "version": "0.1.0",
-  "proxy": "http://localhost:5001/",
+  "proxy": "https://socialspirit-backend.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",

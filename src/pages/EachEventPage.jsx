@@ -13,6 +13,7 @@ const EachEventPage = () => {
   const { events } = useSelector((state) => state.eventauth);
 
   useEffect(() => {
+
     const matchedEvent = events.filter((oneEvent) => {
       return oneEvent._id === params.id;
     });
@@ -20,6 +21,7 @@ const EachEventPage = () => {
       // @ts-ignore
       setEvent(matchedEvent[0]);
     }
+
   }, [events, params.id]);
 
   return (
@@ -65,10 +67,10 @@ const EachEventPage = () => {
               egestas fringilla sapien.
             </p>
           </div>
-          {organisation.name === event.ownerName && new Date(event.date) > new Date() && (
+          {organisation && organisation.name === event.ownerName && new Date(event.date) > new Date() && (
           <VolunteersInterestedTable event={event} />
           )}
-          {organisation.name === event.ownerName && new Date(event.date) < new Date() && (
+          {organisation && organisation.name === event.ownerName && new Date(event.date) < new Date() && (
           <RateVolunteersTable event={event} />
           )}
 

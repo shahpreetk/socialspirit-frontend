@@ -3,12 +3,7 @@ import eventauthService from "./eventauthService";
 
 // Get events from local storage
 const events = JSON.parse(localStorage.getItem("events"));
-// Get organisation token from local storage
-const organisationToken = JSON.parse(localStorage.getItem("organisation")).token;
-// Get organisation name from local storage
-const organisationName = JSON.parse(localStorage.getItem("organisation")).name;
-// Get organisation ID from local storage
-const organisationId = JSON.parse(localStorage.getItem("organisation"))._id;
+
 
 const initialState = {
   events: events ? events : null,
@@ -23,12 +18,22 @@ const initialState = {
 export const addEvent = createAsyncThunk(
   "eventauth/addevent",
   async (event, thunkAPI) => {
+    // Get organisation token from local storage
+    const organisationToken = JSON.parse(
+      localStorage.getItem("organisation")
+    ).token;
+    // Get organisation name from local storage
+    const organisationName = JSON.parse(
+      localStorage.getItem("organisation")
+    ).name;
+    // Get organisation ID from local storage
+    const organisationId = JSON.parse(localStorage.getItem("organisation"))._id;
     try {
       event = {
         ...event,
         eventOwnerId: organisationId,
         eventOwnerName: organisationName,
-      }
+      };
       return await eventauthService.addevent(event, organisationToken);
     } catch (error) {
       const message =
