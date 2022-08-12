@@ -75,9 +75,8 @@ const Home = () => {
     }
 
     // Redirect when logged in
-    if (isSuccess && events && upcomingEvents) {
+    if (isSuccess && upcomingEvents) {
       setLoading(false);
-      // navigate(HOME);
     }
 
 

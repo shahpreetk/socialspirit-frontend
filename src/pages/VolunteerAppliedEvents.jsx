@@ -3,32 +3,35 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { V_PROFILE } from '../constants/routes';
 import { IoSearch } from "react-icons/io5";
-import EventCardsList from "../components/EventCardsList";
+import EventCard from "../components/EventCard";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 const VolunteerEvents = () => {
   const navigate = useNavigate();
-  const [appliedEvents, setAppliedEvents] = React.useState([]);
+
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
-  const { events } = useSelector((state) => state.eventauth);
-
-  const getAppliedEvents = () => {
-    const applied = events.filter((event) => {
-      const date = new Date(event.date);
-      const today = new Date();
-      return date > today;
-    });
-    setAppliedEvents(applied);
-  };
-
+  const { upcomingEvents, isError, isLoading, message } = useSelector((state) => state.eventauth);
 
   React.useEffect(() => {
-    getAppliedEvents();
     if (!volunteer.introduction || !volunteer.hobbies.length) {
       navigate(V_PROFILE);
     }
+
+    if (isError) {
+      toast.error(message);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [volunteer, navigate]);
+
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+
   return (
     <>
       <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
@@ -46,7 +49,7 @@ const VolunteerEvents = () => {
           </div>
         </div>
       </div>
-      <EventCardsList events={appliedEvents} />
+      <EventCard events={upcomingEvents} />
     </>
   );
 };

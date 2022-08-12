@@ -2,32 +2,35 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { O_PROFILE } from '../constants/routes';
-import EventCardsList from "../components/EventCardsList";
 import { IoSearch } from "react-icons/io5";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
+import EventCard from "../components/EventCard";
 
 const OrganisationEvents = () => {
   const navigate = useNavigate();
-  const [pastEvents, setPastEvents] = React.useState([]);
+  // const [pastEvents, setPastEvents] = React.useState([]);
 
   const { organisation } = useSelector((state) => state.organisationauth);
-  const { events } = useSelector((state) => state.eventauth);
-
-  const getPastEvents = () => {
-    const past = events.filter((event) => {
-      const date = new Date(event.date);
-      const today = new Date();
-      return date < today && event.ownerId === organisation._id;
-    });
-    setPastEvents(past);
-  }
+  const { pastEvents, isLoading, isError, message } = useSelector((state) => state.eventauth);
 
   React.useEffect(() => {
-    getPastEvents();
+    // getPastEvents();
     if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
       navigate(O_PROFILE);
     }
+
+    if (isError) {
+      toast.error(message);
+    }
+
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [organisation, navigate]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
@@ -45,7 +48,7 @@ const OrganisationEvents = () => {
           </div>
         </div>
       </div>
-      <EventCardsList events={pastEvents} />
+      <EventCard events={pastEvents} />
 
     </>
   )
