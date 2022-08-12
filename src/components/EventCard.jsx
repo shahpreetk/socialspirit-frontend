@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ALL_EVENTS } from "../constants/routes";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, i }) => {
   return (
     <>
       <div className="card w-auto bg-base-100 shadow-md border-2 border-base-200 mx-6 md:mx-0">
@@ -12,7 +12,7 @@ const EventCard = ({ event }) => {
           </Link>
           <p className="text-right align-middle">{new Date(event.date).toString().slice(0, 21)}</p>
         </div>
-        <figure><img src="https://placeimg.com/400/225/arch" alt={event.name} /></figure>
+        <figure><img src={`https://placeimg.com/400/22${i}/arch`} alt={event.name} /></figure>
         <div className="card-body p-4">
           <p className="text-sm">{event.city}, {event.districtCode}</p>
           <div className="flex items-center text-lg">

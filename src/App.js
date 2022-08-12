@@ -1,25 +1,28 @@
+import {lazy, Suspense} from 'react';
 import { BrowserRouter as Router, Navigate, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as ROUTES from "./constants/routes";
+
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import VolunteerLogin from "./pages/VolunteerLogin";
-import VolunteerRegister from "./pages/VolunteerRegister";
-import OrganisationLogin from "./pages/OrganisationLogin";
-import OrganisationRegister from "./pages/OrganisationRegister";
-import VolunteerProfile from "./pages/VolunteerProfile";
-import OrganisationProfile from "./pages/OrganisationProfile";
-import VolunteerAppliedEvents from "./pages/VolunteerAppliedEvents";
-import VolunteerAcceptedEvents from "./pages/VolunteerAcceptedEvents";
-import VolunteerRejectedEvents from "./pages/VolunteerRejectedEvents";
-import OrganisationPastEvents from "./pages/OrganisationPastEvents";
-import OrganisationUpcomingEvents from "./pages/OrganisationUpcomingEvents";
-import EachEventPage from "./pages/EachEventPage";
-import CreateEvent from "./pages/CreateEvent";
-import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
-import axios from "axios";
+
+const Home = lazy(() => import("./pages/Home"));
+const VolunteerLogin = lazy(() => import("./pages/VolunteerLogin"));
+const VolunteerRegister = lazy(() => import("./pages/VolunteerRegister"));
+const OrganisationLogin = lazy(() => import("./pages/OrganisationLogin"));
+const OrganisationRegister = lazy(() => import("./pages/OrganisationRegister"));
+const VolunteerProfile = lazy(() => import("./pages/VolunteerProfile"));
+const OrganisationProfile = lazy(() => import("./pages/OrganisationProfile"));
+const VolunteerAppliedEvents = lazy(() => import("./pages/VolunteerAppliedEvents"));
+const VolunteerAcceptedEvents = lazy(() => import("./pages/VolunteerAcceptedEvents"));
+const VolunteerRejectedEvents = lazy(() => import("./pages/VolunteerRejectedEvents"));
+const OrganisationPastEvents = lazy(() => import("./pages/OrganisationPastEvents"));
+const OrganisationUpcomingEvents = lazy(() => import("./pages/OrganisationUpcomingEvents"));
+const EachEventPage = lazy(() => import("./pages/EachEventPage"));
+const CreateEvent = lazy(() => import("./pages/CreateEvent"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 axios.defaults.baseURL = "https://socialspirit-backend.herokuapp.com/api";
 
@@ -27,6 +30,22 @@ function App() {
   return (
     <>
       <Router>
+         <Suspense
+        fallback={
+          <div className="flex h-screen">
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-center">
+                <img
+                  className="h-24 w-auto"
+                  src="/socialspiritLogo.png"
+                  alt="loader logo"
+                />
+                <h1>Loading...</h1>
+              </div>
+            </div>
+          </div>
+        }
+      >
         <Header />
         <div className="container mx-auto">
           <Routes>
@@ -73,6 +92,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
+        </Suspense>
       </Router>
       <ToastContainer />
     </>
