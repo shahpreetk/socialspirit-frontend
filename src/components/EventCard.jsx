@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ALL_EVENTS } from "../constants/routes";
+import { toast } from "react-toastify";
 
 const EventCard = ({ events }) => {
   return (
@@ -35,7 +36,7 @@ const EventCard = ({ events }) => {
                   ))}
                 </div>
                 <div className="card-actions justify-end mt-2 md:mt-0">
-                  <button className="btn btn-primary">Register Interest!</button>
+                  <button className="btn btn-primary" onClick={(e) => toast.success("Registered for " + event.name + " successfully")}>Register Interest!</button>
                 </div>
               </div>
               </div>
