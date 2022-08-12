@@ -2,8 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ALL_EVENTS } from "../constants/routes";
 import { toast } from "react-toastify";
+import { useSelector  } from "react-redux";
 
 const EventCard = ({ events }) => {
+
+  const { organisation } = useSelector((state) => state.organisationauth);
+
   return (
     <>
       <div className="grid grid-cols-12 gap-4 mt-8">
@@ -35,9 +39,9 @@ const EventCard = ({ events }) => {
                     <div key={i} className="badge badge-outline">#{tag}</div>
                   ))}
                 </div>
-                <div className="card-actions justify-end mt-2 md:mt-0">
+               {!organisation && <div className="card-actions justify-end mt-2 md:mt-0">
                   <button className="btn btn-primary" onClick={(e) => toast.success("Registered for " + event.name + " successfully")}>Register Interest!</button>
-                </div>
+                </div>}
               </div>
               </div>
               </div>
