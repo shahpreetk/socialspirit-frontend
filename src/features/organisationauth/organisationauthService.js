@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "/api/o/register";
-const LOGIN_URL = "/api/o/login"
-const UPDATE_URL = "/api/o/profile";
+const API_URL = "/o/register";
+const LOGIN_URL = "/o/login"
+const UPDATE_URL = "/o/profile";
 
 // Register a new organisation
 const organisationregister = async (organisationData) => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "/api/events";
-const ADD_EVENT = "/api/event/add";
+const API_URL = "/events";
+const ADD_EVENT = "/event/add";
 
 // Add new event
 const addevent = async (eventData, organisationToken) => {

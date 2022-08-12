@@ -19,6 +19,9 @@ import EachEventPage from "./pages/EachEventPage";
 import CreateEvent from "./pages/CreateEvent";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://socialspirit-backend.herokuapp.com/api";
 
 function App() {
   return (

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "/api/v/register";
-const LOGIN_URL = "/api/v/login"
-const UPDATE_URL = "/api/v/profile";
+const API_URL = "/v/register";
+const LOGIN_URL = "/v/login"
+const UPDATE_URL = "/v/profile";
 
 // Register a new volunteer
 const volunteerregister = async (volunteerData) => {
