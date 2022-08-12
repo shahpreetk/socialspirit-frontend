@@ -27,7 +27,7 @@ const EachEventPage = () => {
   return (
     <>
       <div className="py-16 overflow-hidden">
-        <div className="relative px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="text-lg max-w-prose mx-auto">
             <h1>
               <span className="block text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">
