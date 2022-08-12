@@ -3,10 +3,14 @@ import eventauthService from "./eventauthService";
 
 // Get events from local storage
 const events = JSON.parse(localStorage.getItem("events"));
+const upcomingEvents = JSON.parse(localStorage.getItem("upcomingEvents"));
+const pastEvents = JSON.parse(localStorage.getItem("pastEvents"));
 
 
 const initialState = {
   events: events ? events : null,
+  upcomingEvents: upcomingEvents ? upcomingEvents : null,
+  pastEvents: pastEvents ? pastEvents : null,
   event: '',
   isError: false,
   isSuccess: false,
@@ -102,6 +106,12 @@ export const eventauthSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.events = action.payload;
+        state.upcomingEvents = action.payload.filter(
+          (event) => new Date(event.date) > new Date()
+        );
+        state.pastEvents = action.payload.filter(
+          (event) => new Date(event.date) < new Date()
+        );
       })
       .addCase(getAllEvents.rejected, (state, action) => {
         state.isLoading = false;

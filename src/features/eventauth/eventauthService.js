@@ -19,6 +19,14 @@ const getallevents = async () => {
   const response = await axios.get(API_URL);
   if (response.data) {
     localStorage.setItem("events", JSON.stringify(response.data));
+    const upcoming = response.data.filter((event) => {
+      return new Date(event.date) > new Date();
+    });
+    const past = response.data.filter((event) => {
+      return new Date(event.date) < new Date();
+    });
+    localStorage.setItem("upcomingEvents", JSON.stringify(upcoming));
+    localStorage.setItem("pastEvents", JSON.stringify(past));
   }
   return response.data;
 };

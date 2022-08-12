@@ -2,33 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { V_PROFILE, O_PROFILE } from '../constants/routes';
-import EventCardsList from "../components/EventCardsList";
+import EventCard from "../components/EventCard";
 import { getAllEvents } from "../features/eventauth/eventauthSlice";
 import Fuse from 'fuse.js';
 import Search from "../components/Search";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { volunteer } = useSelector((state) => state.volunteerauth);
   const { organisation } = useSelector((state) => state.organisationauth);
-  const { events } = useSelector((state) => state.eventauth);
 
-  const getUpcomingEvents = () => {
-    dispatch(getAllEvents());
-    const upcoming = events.filter((event) => {
-      const date = new Date(event.date);
-      const today = new Date();
-      return date > today;
-    });
-    setUpcomingEvents(upcoming);
-  };
+  const { events, upcomingEvents, isLoading, isSuccess, isError, message } = useSelector((state) => state.eventauth);
 
   const searchChange = (e) => {
     setSearch(e.target.value.toLowerCase());
@@ -38,7 +30,6 @@ const Home = () => {
     updateInput(search);
     if (!search || search === "") {
       setLoading(false);
-      getUpcomingEvents();
     }
   };
 
@@ -51,7 +42,7 @@ const Home = () => {
     if (e.key === 'Enter') {
       searchNow();
     }
-  }
+  };
 
   const updateInput = async (search) => {
     setLoading(true);
@@ -77,7 +68,19 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getUpcomingEvents();
+    dispatch(getAllEvents());
+
+    if (isError) {
+      toast.error(message);
+    }
+
+    // Redirect when logged in
+    if (isSuccess && events && upcomingEvents) {
+      setLoading(false);
+      // navigate(HOME);
+    }
+
+
     if (localStorage.getItem('organisation')) {
       if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
         navigate(O_PROFILE);
@@ -88,13 +91,19 @@ const Home = () => {
         navigate(V_PROFILE);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [organisation, navigate, volunteer]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess, organisation, message, navigate, dispatch, volunteer]);
+
+
 
   const searchedEvents = filteredEvents.map((event) => {
     // @ts-ignore
     return event.item;
   });
+
+  if (isLoading || loading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -106,17 +115,16 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <EventCardsList events={upcomingEvents} /> */}
-      {loading ? <div className="text-center">Loading Blogs...</div> :
+      {loading ? <div className="text-center">Loading Events...</div> :
         (
           searchedEvents && searchedEvents.length > 0 ? (
             <>
-              <EventCardsList events={searchedEvents} />
+              <EventCard events={searchedEvents} />
             </>
           ) :
             (
               <>
-                {!searchedEvents.length && <EventCardsList events={upcomingEvents} />}
+                {upcomingEvents && !searchedEvents.length && events && <EventCard events={upcomingEvents} />}
               </>
             )
         )
