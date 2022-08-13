@@ -18,7 +18,7 @@ const VolunteerRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { volunteer, isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
+  const { isLoading, isSuccess, isError, message } = useSelector((state) => state.volunteerauth);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

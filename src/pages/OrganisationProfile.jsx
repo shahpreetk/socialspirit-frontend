@@ -64,6 +64,7 @@ const OrganisationProfile = () => {
     }
 
     dispatch(organisationreset());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {

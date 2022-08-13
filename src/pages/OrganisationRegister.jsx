@@ -20,7 +20,7 @@ const OrganisationRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { organisation, isLoading, isSuccess, isError, message } = useSelector((state) => state.organisationauth);
+  const { isLoading, isSuccess, isError, message } = useSelector((state) => state.organisationauth);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
