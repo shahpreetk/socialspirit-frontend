@@ -34,7 +34,9 @@ const EventCard = ({ events }) => {
                   </Link>
                   <p className="text-right align-middle">{new Date(event.date).toString().slice(0, 21)}</p>
                 </div>
-                <figure><img src={`https://placeimg.com/400/22${i}/arch`} alt={event.name} /></figure>
+                <figure>
+                  <img loading="lazy" src={`https://placeimg.com/400/22${i}/arch`} alt={event.name} width="100%" height="100%" />
+                </figure>
                 <div className="card-body p-4">
                   <p className="text-sm">{event.city}, {event.districtCode}</p>
                   <div className="flex items-center text-lg">
