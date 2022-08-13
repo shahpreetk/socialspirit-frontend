@@ -22,6 +22,7 @@ const Header = () => {
     if (organisation) {
       dispatch(organisationLogout());
       dispatch(organisationreset());
+      localStorage.removeItem("vprofiles")
       navigate(ROUTES.O_LOGIN);
     }
   };
@@ -34,7 +35,7 @@ const Header = () => {
             <label tabIndex="0" className="btn btn-ghost lg:hidden">
               <FaBars size={18} />
             </label>
-            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 h-48">
+            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               {volunteer ? (
                 <>
                   <li><Link to={ROUTES.HOME}>Events</Link></li>
@@ -70,7 +71,7 @@ const Header = () => {
                     </ul>
                   </li>
                   <li><Link to={ROUTES.O_PROFILE}>Profile</Link></li>
-                  <li><button className="btn btn-ghost normal-case" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
+                  <li><button className="btn btn-ghost normal-case h-auto" onClick={onLogout}><FaSignOutAlt /> Logout ({organisation.name})</button>
                   </li>
                 </>
               ) : (<>
@@ -94,7 +95,7 @@ const Header = () => {
                     My Events
                     <FaAngleDown />
                   </a>
-                  <ul className="p-2 bg-base-200">
+                  <ul className="p-2 bg-base-200 z-10">
                     <li><Link to={ROUTES.V_APPLIED_EVENTS}>Applied Events</Link></li>
                     <li><Link to={ROUTES.V_ACCEPTED_EVENTS}>Accepted Events</Link></li>
                     <li><Link to={ROUTES.V_REJECTED_EVENTS}>Rejected Events</Link></li>
@@ -113,7 +114,7 @@ const Header = () => {
                     My Events
                     <FaAngleDown />
                   </a>
-                  <ul className="p-2 bg-base-200">
+                    <ul className="p-2 bg-base-200 z-10">
                     <li><Link to={ROUTES.O_CREATE_EVENT}>Create New Event</Link></li>
                     <li><Link to={ROUTES.O_UPCOMING_EVENTS}>Upcoming Events</Link></li>
                     <li><Link to={ROUTES.O_PAST_EVENTS}>Past Events</Link></li>

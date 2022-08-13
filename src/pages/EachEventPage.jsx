@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import VolunteersInterestedTable from "../components/VolunteersInterestedTable";
 import RateVolunteersTable from "../components/RateVolunteersTable";
-import { getAllVolunteers } from "../features/volunteerauth/volunteerauthSlice";
+import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const EachEventPage = () => {
   let params = useParams();
-  const dispatch = useDispatch();
   const [event, setEvent] = useState({});
 
   const { organisation } = useSelector((state) => state.organisationauth);
   const { events } = useSelector((state) => state.eventauth);
+  const { allvolunteers, isLoading, isError, message } = useSelector((state) => state.volunteerauth);
 
   useEffect(() => {
-    dispatch(getAllVolunteers);
+
     const matchedEvent = events.filter((oneEvent) => {
       return oneEvent._id === params.id;
     });
     if (matchedEvent.length > 0) {
       // @ts-ignore
       setEvent(matchedEvent[0]);
+    }
+
+    if (isError) {
+      toast.error(message);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,10 +74,10 @@ const EachEventPage = () => {
               egestas fringilla sapien.
             </p>
           </div>
-          {organisation && organisation.name === event.ownerName && new Date(event.date) > new Date() && (
+          {isLoading ? <Spinner /> : !isLoading && allvolunteers && organisation && organisation.name === event.ownerName && new Date(event.date) > new Date() && (
             <VolunteersInterestedTable event={event} />
           )}
-          {organisation && organisation.name === event.ownerName && new Date(event.date) < new Date() && (
+          {allvolunteers && organisation && organisation.name === event.ownerName && new Date(event.date) < new Date() && (
             <RateVolunteersTable event={event} />
           )}
 

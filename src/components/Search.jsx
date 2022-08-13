@@ -16,6 +16,7 @@ const Search = ({ search, searchChange, searchNow, handleEnterKey }) => {
             autoComplete="off" placeholder="Search…" className="input input-bordered md:w-96 " />
           <button className="btn btn-square" onClick={searchNow}>
             <IoSearch className="h-6 w-6" />
+            <span className="sr-only">Search</span>
           </button>
         </div>
       </div>
