@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { V_PROFILE } from '../constants/routes';
 import { IoSearch } from "react-icons/io5";
-import EventCard from "../components/EventCard";
+import NoButtonEventCard from "../components/NoButtonEventCard";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 
@@ -46,7 +46,7 @@ const VolunteerEvents = () => {
           </div>
         </div>
       </div>
-      <EventCard events={upcomingEvents} />
+      <NoButtonEventCard events={upcomingEvents} />
     </>
   );
 };
