@@ -22,7 +22,8 @@ const EachEventPage = () => {
       setEvent(matchedEvent[0]);
     }
 
-  }, [events, params.id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.id]);
 
   return (
     <>

@@ -46,7 +46,8 @@ const OrganisationLogin = () => {
     }
 
     dispatch(organisationreset());
-  }, [isError, isSuccess, organisation, message, navigate, dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
     return <Spinner />;

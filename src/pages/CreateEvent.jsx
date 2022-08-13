@@ -63,7 +63,8 @@ const CreateEvent = () => {
     }
 
     dispatch(eventreset());
-  }, [isError, isSuccess, message, event, navigate, dispatch]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
     return <Spinner />;

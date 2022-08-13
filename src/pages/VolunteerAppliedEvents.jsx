@@ -24,7 +24,7 @@ const VolunteerEvents = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [volunteer, navigate]);
+  }, [navigate]);
 
 
   if (isLoading) {

@@ -68,8 +68,16 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllEvents());
-    dispatch(getAllVolunteers());
+    if (!volunteer && !organisation) {
+      dispatch(getAllEvents());
+    }
+    else if (volunteer && !organisation) {
+      dispatch(getAllEvents());
+    }
+    else if (!volunteer && organisation) {
+      dispatch(getAllEvents(), getAllVolunteers());
+    }
+
     if (isError) {
       toast.error(message);
     }
@@ -90,8 +98,8 @@ const Home = () => {
         navigate(V_PROFILE);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, isSuccess, organisation, message, navigate, dispatch, volunteer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
 
 

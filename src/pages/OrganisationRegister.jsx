@@ -53,7 +53,7 @@ const OrganisationRegister = () => {
     }
 
     dispatch(organisationreset());
-  }, [isError, isSuccess, organisation, message, navigate, dispatch]);
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
     return <Spinner />;

@@ -26,7 +26,7 @@ const OrganisationEvents = () => {
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [organisation, navigate]);
+  }, [ navigate]);
 
   if (isLoading) {
     return <Spinner />;

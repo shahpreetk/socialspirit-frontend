@@ -49,7 +49,7 @@ const VolunteerRegister = () => {
     }
 
     dispatch(volunteerreset());
-  },[isError,isSuccess,volunteer,message, navigate,dispatch] );
+  },[isError,isSuccess, message, navigate, dispatch] );
 
   if (isLoading) {
     return <Spinner />;
