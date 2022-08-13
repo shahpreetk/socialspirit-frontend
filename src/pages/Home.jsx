@@ -8,7 +8,6 @@ import Fuse from 'fuse.js';
 import Search from "../components/Search";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
-import { getAllVolunteers } from "../features/volunteerauth/volunteerauthSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
