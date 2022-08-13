@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useSelector} from "react-redux";
+import { Link } from "react-router-dom";
+import { V_PROFILE } from "../constants/routes";
 
-const VolunteersInterestedTable = ({event}) => {
+const VolunteersInterestedTable = ({ event }) => {
+
+  const { allvolunteers } = useSelector((state) => state.volunteerauth);
+
   return (
     <>
       <div className="overflow-x-auto prose prose-indigo prose-lg text-gray-700 mx-auto">
@@ -34,94 +40,32 @@ const VolunteersInterestedTable = ({event}) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
+            {allvolunteers && allvolunteers.map(eachVolunteer => (
+              <tr key={eachVolunteer._id}>
+                <th>
+                  <label>
+                    <input type="checkbox" className="checkbox" />
+                  </label>
+                </th>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div>
+                      <div className="font-bold">{eachVolunteer.name}</div>
 
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                5
-              </td>
-              <td>teaching, painting</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div>
-                    <div className="font-bold">Brice Swyre</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                1.5
-              </td>
-              <td>running</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div>
-                    <div className="font-bold">Marjy Ferencz</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                3.2
-              </td>
-              <td>dancing, reading</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div>
-                    <div className="font-bold">Yancy Tear</div>
-
-                  </div>
-                </div>
-              </td>
-              <td>
-                4.3
-              </td>
-              <td>cycling, knitting</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+                </td>
+                <td>
+                  {eachVolunteer.avgRating}
+                </td>
+                <td>{eachVolunteer.hobbies.map(hobby => hobby + " ")}</td>
+                <th>
+                  <Link
+                    to={`${V_PROFILE}/${eachVolunteer._id}`}
+                    className="btn btn-ghost btn-xs">details</Link>
+                </th>
+              </tr>
+            ))}
           </tbody>
 
           <tfoot>
@@ -137,7 +81,7 @@ const VolunteersInterestedTable = ({event}) => {
         </table>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default VolunteersInterestedTable
+export default VolunteersInterestedTable;

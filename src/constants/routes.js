@@ -6,6 +6,7 @@ export const V_REGISTER = "/v/register";
 export const O_LOGIN = "/o/login";
 export const O_REGISTER = "/o/register";
 export const V_PROFILE = "/v/profile";
+export const EACH_PROFILE = "/v/profile/:id";
 export const O_PROFILE = "/o/profile";
 export const V_APPLIED_EVENTS = "/v/applied-events";
 export const V_ACCEPTED_EVENTS = "/v/accepted-events";

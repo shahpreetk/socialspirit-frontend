@@ -3,9 +3,11 @@ import volunteerauthService from "./volunteerauthService";
 
 // Get volunteer from local storage
 const volunteer =JSON.parse(localStorage.getItem("volunteer"));
+const allvolunteers = JSON.parse(localStorage.getItem("vprofiles"));
 
 const initialState = {
   volunteer: volunteer ? volunteer : null,
+  allvolunteers: allvolunteers ? allvolunteers : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -51,6 +53,20 @@ export const volunteerUpdate = createAsyncThunk('volunteerauth/volunteerupdate',
 
    return thunkAPI.rejectWithValue(message);
  }
+})
+
+// Get all Volunteers
+export const getAllVolunteers = createAsyncThunk('volunteerauth/getallvolunteers', async (thunkAPI) => {
+  try {
+    return await volunteerauthService.getallvolunteers();
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    return thunkAPI.rejectWithValue(message);
+  }
 })
 
 // Logout Volunteer
@@ -116,6 +132,20 @@ export const volunteerauthSlice = createSlice({
         state.message = action.payload;
         state.volunteer = null;
       })
+      .addCase(getAllVolunteers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllVolunteers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.allvolunteers = action.payload;
+      })
+      .addCase(getAllVolunteers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.allvolunteers = null;
+      });
   },
 });
 

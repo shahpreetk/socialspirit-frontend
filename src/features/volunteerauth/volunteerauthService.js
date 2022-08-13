@@ -3,6 +3,7 @@ import axios from "axios";
 const API_URL = "/v/register";
 const LOGIN_URL = "/v/login"
 const UPDATE_URL = "/v/profile";
+const GET_PROFILES_URL = "/v/profiles";
 
 // Register a new volunteer
 const volunteerregister = async (volunteerData) => {
@@ -33,6 +34,15 @@ const volunteerupdate = async (volunteerData, volunteerToken) => {
   return response.data;
 };
 
+// Get all volunteers
+const getallvolunteers = async () => {
+  const response = await axios.get(GET_PROFILES_URL);
+  if (response.data) {
+    localStorage.setItem("vprofiles", JSON.stringify(response.data));
+  }
+  return response.data;
+}
+
 // Logout volunteer
 const volunteerlogout = async () => localStorage.removeItem('volunteer');
 
@@ -40,7 +50,8 @@ const volunteerauthService = {
   volunteerregister,
   volunteerlogout,
   volunteerlogin,
-  volunteerupdate
+  volunteerupdate,
+  getallvolunteers,
 };
 
 export default volunteerauthService;

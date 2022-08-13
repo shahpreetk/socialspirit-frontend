@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 import Search from "../components/Search";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
+import { getAllVolunteers } from "../features/volunteerauth/volunteerauthSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const Home = () => {
       setLoading(false);
     }
   };
-
   /**
    * @desc Searching events on press of enter key
    * {@link https://stackoverflow.com/a/31273404/15466726}
@@ -69,7 +69,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllEvents());
-
+    dispatch(getAllVolunteers());
     if (isError) {
       toast.error(message);
     }
