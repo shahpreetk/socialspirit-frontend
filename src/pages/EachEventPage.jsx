@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import VolunteersInterestedTable from "../components/VolunteersInterestedTable";
 import RateVolunteersTable from "../components/RateVolunteersTable";
+import { getAllVolunteers } from "../features/volunteerauth/volunteerauthSlice";
 
 const EachEventPage = () => {
   let params = useParams();
-
+  const dispatch = useDispatch();
   const [event, setEvent] = useState({});
 
   const { organisation } = useSelector((state) => state.organisationauth);
   const { events } = useSelector((state) => state.eventauth);
 
   useEffect(() => {
-
+    dispatch(getAllVolunteers);
     const matchedEvent = events.filter((oneEvent) => {
       return oneEvent._id === params.id;
     });
@@ -22,7 +23,7 @@ const EachEventPage = () => {
       setEvent(matchedEvent[0]);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   return (
@@ -69,10 +70,10 @@ const EachEventPage = () => {
             </p>
           </div>
           {organisation && organisation.name === event.ownerName && new Date(event.date) > new Date() && (
-          <VolunteersInterestedTable event={event} />
+            <VolunteersInterestedTable event={event} />
           )}
           {organisation && organisation.name === event.ownerName && new Date(event.date) < new Date() && (
-          <RateVolunteersTable event={event} />
+            <RateVolunteersTable event={event} />
           )}
 
         </div>

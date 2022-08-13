@@ -75,7 +75,7 @@ const Home = () => {
       dispatch(getAllEvents());
     }
     else if (!volunteer && organisation) {
-      dispatch(getAllEvents(), getAllVolunteers());
+      dispatch(getAllEvents());
     }
 
     if (isError) {
