@@ -11,7 +11,6 @@ import EventCard from "../components/EventCard";
 const OrganisationEvents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [upcomingEvents, setUpcomingEvents] = React.useState([]);
 
   const { organisation } = useSelector((state) => state.organisationauth);
   const { upcomingEvents, isLoading, isError, message } = useSelector((state) => state.eventauth);

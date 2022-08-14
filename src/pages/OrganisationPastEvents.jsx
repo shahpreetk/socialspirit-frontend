@@ -15,7 +15,6 @@ const OrganisationEvents = () => {
   const { pastEvents, isLoading, isError, message } = useSelector((state) => state.eventauth);
 
   React.useEffect(() => {
-    // getPastEvents();
     if (!organisation.description || !organisation.city || !organisation.state || !organisation.country) {
       navigate(O_PROFILE);
     }
