@@ -25,33 +25,34 @@ const OrganisationEvents = () => {
     }
 
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate]);
 
   if (isLoading) {
     return <Spinner />;
   }
   return (
     <>
-      <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
-        <div>
-          <div className="flex flex-col text-center items-center">
-            <h6 className="text-4xl font-bold mx-2 mb-6"> <span className="text-primary-focus">Past</span> Events</h6>
-            <div className="form-control">
-              <div className="input-group">
-                <input type="text" placeholder="Search…" className="input input-bordered md:w-96 " />
-                <button className="btn btn-square">
-                  <IoSearch className="h-6 w-6" />
-                </button>
+      <div className="container mx-auto">
+        <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
+          <div>
+            <div className="flex flex-col text-center items-center">
+              <h6 className="text-4xl font-bold mx-2 mb-6"> <span className="text-primary-focus">Past</span> Events</h6>
+              <div className="form-control">
+                <div className="input-group">
+                  <input type="text" placeholder="Search…" className="input input-bordered md:w-96 " />
+                  <button className="btn btn-square">
+                    <IoSearch className="h-6 w-6" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <EventCard events={pastEvents} />
       </div>
-      <EventCard events={pastEvents} />
-
     </>
-  )
-}
+  );
+};
 
-export default OrganisationEvents
+export default OrganisationEvents;

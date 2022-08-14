@@ -48,7 +48,7 @@ function App() {
           }
         >
           <Header />
-          <div className="container mx-auto">
+          {/* <div className="container mx-auto"> */}
             <Routes>
               <Route path={ROUTES.HOME} element={<Home />} />
               <Route path="/events" element={<Navigate to="/" />} />
@@ -89,7 +89,7 @@ function App() {
               <Route path={ROUTES.O_CREATE_EVENT} element={<CreateEvent />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </div>
+          {/* </div> */}
           <Footer />
         </Suspense>
       </Router>

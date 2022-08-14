@@ -31,6 +31,7 @@ const VolunteerEvents = () => {
 
   return (
     <>
+      <div className="container mx-auto">
       <div className="hero min-h-full lg:mt-5 align-center bg-base-100 py-5">
         <div>
           <div className="flex flex-col text-center items-center">
@@ -46,7 +47,8 @@ const VolunteerEvents = () => {
           </div>
         </div>
       </div>
-      <NoButtonEventCard events={upcomingEvents} />
+        <NoButtonEventCard events={upcomingEvents} />
+        </div>
     </>
   );
 };
