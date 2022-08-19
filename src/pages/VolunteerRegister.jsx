@@ -9,11 +9,12 @@ import { V_LOGIN,O_REGISTER } from "../constants/routes";
 const VolunteerRegister = () => {
   const [formData, setFormData] = React.useState({
     name: "",
+    mobileNumber: "",
     email: "",
     password: "",
   });
 
-  const { name, email, password } = formData;
+  const { name, mobileNumber, email, password } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const VolunteerRegister = () => {
     e.preventDefault();
     const volunteerData = {
       name,
+      mobileNumber,
       email,
       password,
     };
@@ -75,6 +77,12 @@ const VolunteerRegister = () => {
                         <span className="label-text">Name</span>
                       </label>
                       <input type="text" id="name" name="name" value={name} onChange={onChange} placeholder="Enter your Full Name" className="input input-bordered" required />
+                    </div>
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text">Mobile Number</span>
+                      </label>
+                      <input type="text" id="mobileNumber" name="mobileNumber" value={mobileNumber} onChange={onChange} placeholder="Enter your Mobile Number" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                       <label className="label">
