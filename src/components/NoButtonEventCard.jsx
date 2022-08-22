@@ -13,7 +13,7 @@ const NoButtonEventCard = ({ events }) => {
               key={event._id}
               className="col-span-12 md:col-span-5 lg:col-span-4"
             >
-              <div className="card w-auto bg-base-100 shadow-md border-2 border-base-200 mx-6 md:mx-0">
+              <div className="card w-auto bg-base-100 shadow-md border-2 border-base-200 mx-6 md:mx-0 h-full">
                 <div className="card-body grid grid-flow-col p-4 items-baseline">
                   <Link to={`${ALL_EVENTS}/${event._id}`} className="hover:underline">
                     <h2 className="card-title">{event.name}</h2>
@@ -21,7 +21,7 @@ const NoButtonEventCard = ({ events }) => {
                   <p className="text-right align-middle">{new Date(event.date).toString().slice(0, 21)}</p>
                 </div>
                 <figure>
-                  <img loading="lazy" src={`https://placeimg.com/400/22${i}/arch`} alt={event.name} width="100%" height="100%" />
+                  <img loading="lazy" src={event.image} alt={event.name} width="300" height="200" className="object-cover h-64 w-96 rounded-xl" />
                 </figure>
                 <div className="card-body p-4">
                   <p className="text-sm">{event.city}, {event.districtCode}</p>
