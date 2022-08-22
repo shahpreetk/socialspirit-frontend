@@ -58,7 +58,7 @@ const EachEventPage = () => {
             <figure>
               <img
                 className="w-full rounded-lg"
-                src="https://placeimg.com/400/225/arch"
+                src={event.image}
                 alt="event poster"
                 width={1310}
                 height={873}
