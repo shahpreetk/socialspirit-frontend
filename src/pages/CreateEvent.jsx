@@ -13,7 +13,6 @@ const CreateEvent = () => {
 
   const { event, isLoading, isSuccess, isError, message } = useSelector((state) => state.eventauth);
 
-  // const [disabled, setDisabled] = React.useState(false);
   const [formData, setFormData] = React.useState({
     eventName: "",
     eventDate: "",
