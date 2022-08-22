@@ -26,7 +26,7 @@ const CreateEvent = () => {
     eventImage: "",
   });
 
-  const { eventName, eventDate, eventDescription, eventDuration, eventMaxVolunteers, city, districtCode, eventSocialMedia, eventTags, eventImage } = formData;
+  const { eventName, eventDate, eventDescription, eventDuration, eventMaxVolunteers, city, districtCode, eventSocialMedia, eventTags } = formData;
 
   const onChange = e => {
     setFormData((prevState) => ({
