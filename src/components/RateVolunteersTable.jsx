@@ -26,7 +26,7 @@ const RateVolunteersTable = ({event}) => {
               <th>Volunteer Name</th>
               <th>Enter Rating
                 <label>
-                  <input type="text" className="ml-4 border-2 border-base-300 w-8" />
+                  <input type="text" className="pl-2 pr-2 ml-4 border-2 border-base-300 w-8" />
                 </label>
               </th>
               <th></th>
@@ -49,7 +49,7 @@ const RateVolunteersTable = ({event}) => {
               </td>
               <td>
                 <label>
-                  <input type="text" className="ml-4 border-2 border-base-300 w-8" />
+                  <input type="text" className="pl-2 pr-2 ml-4 border-2 border-base-300 w-8" />
                 </label>
               </td>
 
@@ -72,7 +72,7 @@ const RateVolunteersTable = ({event}) => {
               </td>
               <td>
                 <label>
-                  <input type="text" className="ml-4 border-2 border-base-300 w-8" />
+                  <input type="text" className="pl-2 pr-2 ml-4 border-2 border-base-300 w-8" />
                 </label>
               </td>
 
@@ -97,7 +97,7 @@ const RateVolunteersTable = ({event}) => {
               </td>
               <td>
                 <label>
-                  <input type="text" className="ml-4 border-2 border-base-300 w-8" />
+                  <input type="text" className="pl-2 pr-2 ml-4 border-2 border-base-300 w-8" />
                 </label>
               </td>
 
