@@ -23,10 +23,11 @@ const CreateEvent = () => {
     districtCode: "",
     eventDescription: "",
     eventSocialMedia: "",
-    eventTags: ""
+    eventTags: "",
+    eventImage: "",
   });
 
-  const { eventName, eventDate, eventDescription, eventDuration, eventMaxVolunteers, city, districtCode, eventSocialMedia, eventTags } = formData;
+  const { eventName, eventDate, eventDescription, eventDuration, eventMaxVolunteers, city, districtCode, eventSocialMedia, eventTags, eventImage } = formData;
 
   const onChange = e => {
     setFormData((prevState) => ({
@@ -47,7 +48,8 @@ const CreateEvent = () => {
       city,
       districtCode,
       socialMediaLink: eventSocialMedia,
-      tags: eventTags
+      tags: eventTags,
+      image:"https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80"
     };
     dispatch(addEvent(eventData));
   };
