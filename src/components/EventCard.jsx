@@ -35,7 +35,7 @@ const EventCard = ({ events }) => {
                   <p className="text-right align-middle">{new Date(event.date).toString().slice(0, 21)}</p>
                 </div>
                 <figure>
-                  <img loading="lazy" src={event.image || "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80"} alt={event.name} width="100%" height="100%" />
+                  <img loading="lazy" src={event.image || "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80"} alt={event.name} width="300" height="200" className="object-cover h-64 w-96 rounded-xl" />
                 </figure>
                 <div className="card-body p-4">
                   <p className="text-sm">{event.city}, {event.districtCode}</p>
